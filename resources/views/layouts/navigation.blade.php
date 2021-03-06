@@ -16,12 +16,12 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" x-show="{{ Auth::user()->can('roles_access') ? 'true' : 'false' }}">
                     <x-nav-link :href="route('permisssions.index')" :active="request()->routeIs('permisssions.index')">
                         Permission
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" x-show="{{ Auth::user()->can('roles_access') ? 'true' : 'false' }}">
                     <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.index')">
                         Roles
                     </x-nav-link>
