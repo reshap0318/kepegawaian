@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Role;
 
 use Livewire\Component;
-use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\{Role,Permission};
 
 class Edit extends Component
@@ -12,9 +11,6 @@ class Edit extends Component
 
     public function render()
     {
-        if (!Gate::allows('roles_manage')) {
-            return abort(401);
-        }
         return view('livewire.role.edit',[
             'permit' => Permission::all(),
             'role' => new Role()

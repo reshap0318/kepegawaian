@@ -16,16 +16,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/permissions', PermissionIndex::class)->name('permisssions.index');
-    Route::get('/admin/permissions/create', PermissionCreate::class)->name('permisssions.create');
-    Route::get('/admin/permissions/{permission}/edit', PermissionEdit::class)->name('permisssions.edit');
 
-    Route::get('/admin/roles', RoleIndex::class)->name('roles.index');
-    Route::get('/admin/roles/create', RoleCreate::class)->name('roles.create');
-    Route::get('/admin/roles/{role}/edit', RoleEdit::class)->name('roles.edit');
+    Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
+
+    Route::prefix('admin')->group(function () {
+        Route::middleware(['can:roles_manage'])->group(function () {
+            // roles
+            Route::get('permissions/create', PermissionCreate::class)->name('permisssions.create');
+            Route::get('permissions/{permission}/edit', PermissionEdit::class)->name('permisssions.edit');
+    
+            // permission
+            Route::get('roles/create', RoleCreate::class)->name('roles.create');
+            Route::get('roles/{role}/edit', RoleEdit::class)->name('roles.edit');
+        });
+    
+        Route::middleware(['can:roles_access'])->group(function () {
+            //roles
+            Route::get('permissions', PermissionIndex::class)->name('permisssions.index');
+            //permission
+            Route::get('roles', RoleIndex::class)->name('roles.index');
+        });
+    });
+
+    
 });

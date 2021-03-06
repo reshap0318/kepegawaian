@@ -18,9 +18,6 @@ class Edit extends Component
 
     public function render()
     {
-        if (!Gate::allows('roles_manage')) {
-            return abort(401);
-        }
         return view('livewire.permission.edit');
     }
 
