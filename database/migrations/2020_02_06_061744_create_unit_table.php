@@ -16,7 +16,7 @@ class CreateUnitTable extends Migration
         Schema::create('unit', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->unsignedBigInteger('parent_unit_id');
+            $table->unsignedBigInteger('parent_unit_id')->nullable();
             $table->timestamps();
 
             $table->foreign('parent_unit_id')->references('id')->on('unit')->onDelete('cascade')->onUpdate('cascade');   

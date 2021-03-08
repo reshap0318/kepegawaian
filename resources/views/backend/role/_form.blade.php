@@ -1,5 +1,4 @@
-
-<div class="px-4 py-5 bg-white sm:p-6">
+<div class="px-4 pt-3">
     <x-label for="name" value="Name" />
     <x-input wire:model.lazy="name" id="name" class="block mt-1 w-full" type="text" required autofocus autocomplete="off"/>
     <x-validation-form-error name="name"/>

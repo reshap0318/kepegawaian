@@ -45,6 +45,9 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
+                        <x-dropdown-link :href="route('profile')" :active="request()->routeIs('profile')">
+                            Profile
+                        </x-dropdown-link>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
@@ -75,6 +78,16 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1" x-show="{{ Auth::user()->can('roles_access') ? 'true' : 'false' }}">
+            <x-responsive-nav-link :href="route('permisssions.index')" :active="request()->routeIs('permisssions.index')">
+                Permission
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1" x-show="{{ Auth::user()->can('roles_access') ? 'true' : 'false' }}">
+            <x-responsive-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.index')">
+                Roles
             </x-responsive-nav-link>
         </div>
 

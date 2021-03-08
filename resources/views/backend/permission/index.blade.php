@@ -4,7 +4,7 @@
     <x-card>
         <x-slot name="btn"> 
             <div class="text-right pb-3">
-                <x-button class="ml-3 normal-case" color="indigo" href="{{ route('roles.create') }}" href="{{ route('permisssions.create') }}">
+                <x-button class="ml-3 normal-case" color="indigo" href="{{ route('permisssions.create') }}">
                     Tambah
                 </x-button>
             </div>
@@ -17,7 +17,7 @@
                             Permissions
                         </th>
                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Action
+                            Aksi
                         </th>
                     </tr>
                 </thead>
