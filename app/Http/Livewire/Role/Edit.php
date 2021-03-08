@@ -11,7 +11,7 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.role.edit',[
+        return view('backend.role.edit',[
             'permit' => Permission::all(),
             'role' => new Role()
         ]);
@@ -27,7 +27,7 @@ class Edit extends Component
     public function update()
     {
         $this->validate([
-            'name' => 'required|unique:roles,name'
+            'name' => 'required|unique:roles,name,'.$this->role->id
         ]);
         $this->role->update(['name'=>$this->name]);
         $this->role->givePermissionTo($this->permissions);

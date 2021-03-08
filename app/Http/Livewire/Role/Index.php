@@ -9,7 +9,7 @@ class Index extends Component
 {
     public function render()
     {
-        return view('livewire.role.index',[
+        return view('backend.role.index',[
             'roles' => Role::all()
         ]);
     }

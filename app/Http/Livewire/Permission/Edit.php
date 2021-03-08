@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Permission;
 
 use Livewire\Component;
-use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Permission;
 
 class Edit extends Component
@@ -18,13 +17,13 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.permission.edit');
+        return view('backend.permission.edit');
     }
 
     public function update()
     {
         $this->validate([
-            'permission' => 'required|unique:permissions,name',
+            'permission' => 'required|unique:permissions,name,'.$this->permission->id,
         ]);
 
         $this->mPermission->update(['name'=>$this->permission]);

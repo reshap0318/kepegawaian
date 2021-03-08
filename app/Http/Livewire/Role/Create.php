@@ -11,7 +11,7 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.role.create', [
+        return view('backend.role.create', [
             'permit' => Permission::all(),
             'role' => new Role()
         ]);

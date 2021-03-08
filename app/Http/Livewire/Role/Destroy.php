@@ -8,6 +8,6 @@ class Destroy extends Component
 {
     public function render()
     {
-        return view('livewire.role.destroy');
+        return view('backend.role.destroy');
     }
 }
