@@ -18,8 +18,8 @@ class CreatePegawaiFungsionalTable extends Migration
             $table->unsignedBigInteger('pegawai_id');
             $table->unsignedBigInteger('fungsional_id');
             $table->date('tmt');
-            $table->string('file_sk');
-            $table->string('status');
+            $table->string('file_sk')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by');
             $table->timestamps();

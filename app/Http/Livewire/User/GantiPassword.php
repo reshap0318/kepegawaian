@@ -11,7 +11,7 @@ class GantiPassword extends Component
 
     public function mount()
     {
-        $this->user =app('auth')->user();
+        $this->user = app('auth')->user();
     }
 
     public function render()

@@ -19,8 +19,8 @@ class CreatePegawaiJabatanTable extends Migration
             $table->unsignedBigInteger('jabatan_id');
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
-            $table->string('file_sk');
-            $table->string('status');
+            $table->string('file_sk')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by');
             $table->timestamps();

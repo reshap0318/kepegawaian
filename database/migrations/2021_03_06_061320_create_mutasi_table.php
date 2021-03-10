@@ -19,7 +19,7 @@ class CreateMutasiTable extends Migration
             $table->unsignedBigInteger('unit_id');
             $table->date('tgl_mutasi');
             $table->string('file_sk');
-            $table->string('status');
+            $table->tinyInteger('status')->default(0);
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by');
             $table->timestamps();

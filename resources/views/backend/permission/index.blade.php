@@ -38,11 +38,14 @@
                         </tr>
                     @endforeach
                 </tbody>
-            </table>              
+            </table> 
         @else 
             <div class="p-6 bg-white border-b border-gray-200">
                 Tidak Ada Data Ditemukan
             </div>
         @endif
-    </x-card>
+        <div class="my-2 px-2">
+            {!! $permissions->links() !!}        
+        </div>
+    </x-card>     
 </div>

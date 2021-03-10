@@ -15,26 +15,24 @@ class CreatePegawaiTable extends Migration
     {
         Schema::create('pegawai', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
-            $table->string('nama');
-            $table->string('gelar_depan');
-            $table->string('gelar_belakang');
+            $table->string('gelar_depan')->nullable();
+            $table->string('gelar_belakang')->nullable();
             $table->unsignedBigInteger('unit_id');
-            $table->text('alamat');
-            $table->string('geo_alamat');
+            $table->text('alamat')->nullable();
+            $table->string('geo_alamat')->nullable();
             $table->string('nip');
             $table->boolean('jenis_kelamin');
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
-            $table->string('nidn');
-            $table->string('npwp');
-            $table->string('tipe');
-            $table->boolean('ikatan_kerja');
-            $table->string('no_hp');
-            $table->string('email')->unique();
-            $table->tinyInteger('status');
-            $table->date('tgl_pensiun');
-            $table->string('file_sk_cpns');
-            $table->string('file_sk_pns');
+            $table->string('nidn')->nullable();
+            $table->string('npwp')->nullable();
+            $table->string('tipe')->nullable();
+            $table->boolean('ikatan_kerja')->default(false);
+            $table->string('no_hp')->nullable();
+            $table->tinyInteger('status')->nullable();
+            $table->date('tanggal_pensiun')->nullable();
+            $table->string('file_sk_cpns')->nullable();
+            $table->string('file_sk_pns')->nullable();
             $table->timestamps();
 
 
