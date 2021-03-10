@@ -25,9 +25,4 @@ class Pegawai extends Model
     {
         return $this->hasOne(User::class, 'id', 'id');
     }
-
-    public function pangkat()
-    {
-        return $this->hasMany(PegawaiPangkat::class, 'pegawai_id', 'id');
-    }
 }

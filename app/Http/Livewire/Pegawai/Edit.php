@@ -29,14 +29,14 @@ class Edit extends Component
             $this->nip = $pegawai->nip;
             $this->jenis_kelamin = $pegawai->jenis_kelamin;
             $this->tempat_lahir = $pegawai->tempat_lahir;
-            $this->tanggal_lahir = $pegawai->tanggal_lahir;
+            $this->tgl_lahir = $pegawai->tanggal_lahir;
             $this->nidn = $pegawai->nidn;
             $this->npwp = $pegawai->npwp;
             $this->tipe = $pegawai->tipe;
             $this->ikatan_kerja = $pegawai->ikatan_kerja;
             $this->no_hp = $pegawai->no_hp;
             $this->status = $pegawai->status;
-            $this->tanggal_pensiun = $pegawai->tanggal_pensiun;
+            $this->tgl_pensiun = $pegawai->tanggal_pensiun;
             $this->file_sk_cpns = $pegawai->file_sk_cpns;
             $this->file_sk_pns = $pegawai->file_sk_pns;
         }

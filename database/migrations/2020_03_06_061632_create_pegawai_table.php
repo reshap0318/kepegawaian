@@ -23,14 +23,14 @@ class CreatePegawaiTable extends Migration
             $table->string('nip');
             $table->boolean('jenis_kelamin');
             $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
+            $table->date('tgl_lahir');
             $table->string('nidn')->nullable();
             $table->string('npwp')->nullable();
             $table->string('tipe')->nullable();
             $table->boolean('ikatan_kerja')->default(false);
             $table->string('no_hp')->nullable();
             $table->tinyInteger('status')->nullable();
-            $table->date('tanggal_pensiun')->nullable();
+            $table->date('tgl_pensiun')->nullable();
             $table->string('file_sk_cpns')->nullable();
             $table->string('file_sk_pns')->nullable();
             $table->timestamps();

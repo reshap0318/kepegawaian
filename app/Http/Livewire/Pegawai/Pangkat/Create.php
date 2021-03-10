@@ -3,12 +3,17 @@
 namespace App\Http\Livewire\Pegawai\Pangkat;
 
 use Livewire\Component;
-use App\Models\PangkatGolongan;
-use App\Models\PegawaiPangkat;
+use App\Models\{PangkatGolongan, PegawaiPangkat, User};
 
 class Create extends Component
 {
-    public $pegawai_id , $pangkat, $tmt, $file_sk, $status, $created_by, $updated_by;
+    public $pangkat, $tmt, $file_sk;
+    public $user;
+
+    public function mount(User $user)
+    {
+        $this->user = $user;
+    }
 
     public function render()
     {
@@ -25,15 +30,15 @@ class Create extends Component
         ]);
 
         PegawaiPangkat::create([
-            'pegawai_id' => Auth()->user()->id,
+            'pegawai_id' => $this->user->id,
             'pangkat_id' => $this->pangkat,
             'tmt' => $this->tmt,
-            'status' => 0,
+            'status' => 1,
             'file_sk' => $this->file_sk,
             'created_by' => Auth()->user()->id,
             'updated_by' =>Auth()->user()->id
         ]);
 
-        return redirect()->route('pegawaiPangkats.index');
+        return redirect()->route('pegawaiPangkats.index', $this->user);
     }
 }

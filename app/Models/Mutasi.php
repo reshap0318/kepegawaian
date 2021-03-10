@@ -5,20 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PegawaiJabatan extends Model
+class Mutasi extends Model
 {
     use HasFactory;
 
-    protected $table = 'pegawai_jabatan';
+    protected $table = 'mutasi';
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'pegawai_id', 'jabatan_id', 'tgl_mulai', 'tgl_selesai','file_sk', 'status', 'created_by', 'updated_by'
-    ]; 
+        'pegawai_id', 'unit_id', 'tgl_mutasi', 'file_sk', 'status', 'created_by', 'updated_by'
+    ];
 
-    public function jabatan()
+    public function unit()
     {
-        return $this->hasOne(JabatanUnit::class, 'id', 'jabatan_id');
+        return $this->hasOne(Unit::class, 'id', 'unit_id');
     }
 
     public function pegawai()

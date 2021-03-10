@@ -56,14 +56,14 @@ class Create extends Component
         $pegawai->nip = $this->nip;
         $pegawai->jenis_kelamin = $this->jenis_kelamin;
         $pegawai->tempat_lahir = $this->tempat_lahir;
-        $pegawai->tanggal_lahir = $this->tanggal_lahir;
+        $pegawai->tgl_lahir = $this->tanggal_lahir;
         $pegawai->nidn = $this->nidn;
         $pegawai->npwp = $this->npwp;
         $pegawai->tipe = $this->tipe;
         $pegawai->ikatan_kerja = $this->ikatan_kerja;
         $pegawai->no_hp = $this->no_hp;
         $pegawai->status = $this->status;
-        $pegawai->tanggal_pensiun = $this->tanggal_pensiun;
+        $pegawai->tgl_pensiun = $this->tanggal_pensiun;
         $pegawai->file_sk_cpns = $this->file_sk_cpns;
         $pegawai->file_sk_pns = $this->file_sk_pns;
         $pegawai->save();

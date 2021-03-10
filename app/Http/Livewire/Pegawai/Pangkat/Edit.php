@@ -7,8 +7,8 @@ use Livewire\Component;
 
 class Edit extends Component
 {
-    public $pegawaiPangkat;
-    public $pegawai_id, $pangkat, $tmt, $status, $file_sk, $created_by, $updated_by;
+    public $pegawaiPangkat, $user;
+    public $pangkat, $tmt, $status, $file_sk;
     
     public function render()
     {
@@ -17,16 +17,14 @@ class Edit extends Component
         ]);
     }
 
-    public function mount(PegawaiPangkat $pegawaiPangkat)
+    public function mount(User $user, PegawaiPangkat $pegawaiPangkat)
     {
         $this->pegawaiPangkat = $pegawaiPangkat;
-        $this->pegawai_id = $pegawaiPangkat->pegawai_id;
-        $this->pangkat = $pegawaiPangkat->pangkat;
+        $this->pangkat = $pegawaiPangkat->pangkat_id;
         $this->tmt = $pegawaiPangkat->tmt;
-        $this->status = $pegawaiPangkat->status;
         $this->file_sk = $pegawaiPangkat->file_sk;
-        $this->created_by = $pegawaiPangkat->created_by;
-        $this->updated_by = $pegawaiPangkat->updated_by;
+
+        $this->user = $user;
 
     }
 
@@ -34,19 +32,18 @@ class Edit extends Component
     {
         $this->validate([
             'pangkat' => 'required',
-            'tmt' => 'required',
-
-            
+            'tmt' => 'required'
         ]);
+
         $this->pegawaiPangkat->update([
-            'pegawai_id' => Auth()->user()->id,
             'pangkat' => $this->pangkat,
             'tmt' => $this->tmt,
-            'status' => $this->status,
             'file_sk' => $this->file_sk,
-
+            'status' => 1,
+            'created_by' => Auth()->user()->id,
         ]);
-        return redirect()->route('pegawaiPangkats.index');
+
+        return redirect()->route('pegawaiPangkats.index', $this->user);
     }
 
 }

@@ -34,6 +34,9 @@ use App\Http\Livewire\{
     Pegawai\Jabatan\Index as PegawaiJabatanIndex,
     Pegawai\Jabatan\Create as PegawaiJabatanCreate,
     Pegawai\Jabatan\Edit as PegawaiJabatanEdit,
+    Pegawai\Mutasi\Index as PegawaiMutasiIndex,
+    Pegawai\Mutasi\Create as PegawaiMutasiCreate,
+    Pegawai\Mutasi\Edit as PegawaiMutasiEdit,
 };
 
 require __DIR__.'/auth.php';
@@ -97,25 +100,33 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/create', PegawaiCreate::class)->name('pegawai.create');
             Route::get('/{user}/edit', PegawaiEdit::class)->name('pegawai.edit');
 
-            Route::prefix('fungsional')->group(function () {
-                Route::get('', PegawaiFungsionalIndex::class)->name('pegawaiFungsionals.index');
-                Route::get('/create', PegawaiFungsionalCreate::class)->name('pegawaiFungsionals.create');
-                Route::get('/{pegawaiFungsional}/edit', PegawaiFungsionalEdit::class)->name('pegawaiFungsionals.edit');
-            });
+            Route::prefix('{user}')->group(function () {
+                Route::prefix('fungsional')->group(function () {
+                    Route::get('', PegawaiFungsionalIndex::class)->name('pegawaiFungsionals.index');
+                    Route::get('/create', PegawaiFungsionalCreate::class)->name('pegawaiFungsionals.create');
+                    Route::get('/{pegawaiFungsional}/edit', PegawaiFungsionalEdit::class)->name('pegawaiFungsionals.edit');
+                });
+    
+                Route::prefix('pangkat')->group(function () {
+                    Route::get('', PegawaiPangkatIndex::class)->name('pegawaiPangkats.index');
+                    Route::get('/create', PegawaiPangkatCreate::class)->name('pegawaiPangkats.create');
+                    Route::get('/{pegawaiPangkat}/edit', PegawaiPangkatEdit::class)->name('pegawaiPangkats.edit');
+                });
+    
+                Route::prefix('jabatan')->group(function () {
+                    Route::get('', PegawaiJabatanIndex::class)->name('pegawaiJabatans.index');
+                    Route::get('/create', PegawaiJabatanCreate::class)->name('pegawaiJabatans.create');
+                    Route::get('/{pegawaiJabatan}/edit', PegawaiJabatanEdit::class)->name('pegawaiJabatans.edit');
+                });
 
-            Route::prefix('pangkat')->group(function () {
-                Route::get('', PegawaiPangkatIndex::class)->name('pegawaiPangkats.index');
-                Route::get('/create', PegawaiPangkatCreate::class)->name('pegawaiPangkats.create');
-                Route::get('/{pegawaiPangkat}/edit', PegawaiPangkatEdit::class)->name('pegawaiPangkats.edit');
+                Route::prefix('mutasi')->group(function () {
+                    Route::get('', PegawaiMutasiIndex::class)->name('pegawaiMutasis.index');
+                    Route::get('/create', PegawaiMutasiCreate::class)->name('pegawaiMutasis.create');
+                    Route::get('/{mutasi}/edit', PegawaiMutasiEdit::class)->name('pegawaiMutasis.edit');
+                });
             });
-
-            Route::prefix('jabatan')->group(function () {
-                Route::get('', PegawaiJabatanIndex::class)->name('pegawaiJabatans.index');
-                Route::get('/create', PegawaiJabatanCreate::class)->name('pegawaiJabatans.create');
-                Route::get('/{pegawaiJabatan}/edit', PegawaiJabatanEdit::class)->name('pegawaiJabatans.edit');
-            });
-
         });
+
     });
 
 });

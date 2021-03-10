@@ -3,12 +3,12 @@
 namespace App\Http\Livewire\Pegawai\Jabatan;
 
 use Livewire\Component;
-use App\Models\{JabatanUnit, PegawaiJabatan,User};
+use App\Models\{JabatanUnit, PegawaiJabatan, User};
 
 class Edit extends Component
 {
-    public $pegawaiJabatan;
-    public $pegawai_id, $jabatan, $tgl_mulai, $tgl_selesai, $file_sk, $status, $created_by, $updated_by;
+    public $pegawaiJabatan, $user;
+    public $jabatan, $tanggal_mulai, $tanggal_selesai, $file_sk;
     
 
     public function render()
@@ -17,37 +17,35 @@ class Edit extends Component
             'jabatanUnits' => JabatanUnit::all()
         ]);
     }
-    public function mount(PegawaiJabatan $pegawaiJabatan)
+    public function mount(User $user, PegawaiJabatan $pegawaiJabatan)
     {
         $this->pegawaiJabatan = $pegawaiJabatan;
-        $this->pegawai_id = $pegawaiJabatan->pegawai_id;
-        $this->jabatan = $pegawaiJabatan->jabatan;
-        $this->tgl_mulai = $pegawaiJabatan->tgl_mulai;
-        $this->tgl_selesai = $pegawaiJabatan->tgl_selesai;
-        $this->status = $pegawaiJabatan->status;
+        $this->jabatan = $pegawaiJabatan->jabatan_id;
+        $this->tanggal_mulai = $pegawaiJabatan->tgl_mulai;
+        $this->tanggal_selesai = $pegawaiJabatan->tgl_selesai;
         $this->file_sk = $pegawaiJabatan->file_sk;
-        $this->created_by = $pegawaiJabatan->created_by;
-        $this->updated_by = $pegawaiJabatan->updated_by;
 
+        $this->user = $user;
     }
 
     public function update()
     {
         $this->validate([
             'jabatan' => 'required',
-
+            'tanggal_mulai' => 'required',
+            'tanggal_selesai' => 'required',
         ]);
+
         $this->pegawaiJabatan->update([
-            'pegawai_id' => Auth()->user()->id,
             'jabatan_id' => $this->jabatan,
-            'tgl_mulai' => $this->tgl_mulai,
-            'tgl_selesai' => $this->tgl_selesai,
-            'status' => 0,
+            'tgl_mulai' => $this->tanggal_mulai,
+            'tgl_selesai' => $this->tanggal_selesai,
+            'status' => 1,
             'file_sk' => $this->file_sk,
-            'created_by' => Auth()->user()->id,
             'updated_by' =>Auth()->user()->id
         ]);
-        return redirect()->route('pegawaiJabatans.index');
+
+        return redirect()->route('pegawaiJabatans.index', $this->user);
     }
 
 }

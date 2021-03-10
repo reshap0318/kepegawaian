@@ -14,12 +14,14 @@ class PegawaiPangkat extends Model
     protected $fillable = [
         'pegawai_id', 'pangkat_id', 'tmt', 'file_sk', 'status', 'created_by', 'updated_by'
     ];
-    public function Pegawai()
+    
+    public function pegawai()
     {
         return $this->belongsTo('App\Pegawai', 'pegawai_id', 'id');
     }
-    public function PangkatGolongan()
+
+    public function pangkatGolongan()
     {
-        return $this->belongsTo('App\PangkatGolongan', 'pangkat_id', 'id');
+        return $this->belongsTo(pangkatGolongan::class, 'pangkat_id', 'id');
     }
 }
