@@ -14,13 +14,13 @@ class CreatePegawaiJabatanTable extends Migration
     public function up()
     {
         Schema::create('pegawai_jabatan', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->id();
             $table->unsignedBigInteger('pegawai_id');
             $table->unsignedBigInteger('jabatan_id');
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
-            $table->string('file_sk');
-            $table->string('status');
+            $table->string('file_sk')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by');
             $table->timestamps();
@@ -28,8 +28,8 @@ class CreatePegawaiJabatanTable extends Migration
             $table->foreign('pegawai_id')->references('id')->on('pegawai')->onDelete('cascade')->onUpdate('cascade');   
             $table->foreign('jabatan_id')->references('id')->on('jabatan_unit')->onDelete('cascade')->onUpdate('cascade');  
             
-            $table->foreign('created_by')->references('id')->on('pegawai')->onDelete('cascade')->onUpdate('cascade'); 
-            $table->foreign('updated_by')->references('id')->on('pegawai')->onDelete('cascade')->onUpdate('cascade'); 
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade'); 
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade'); 
         });
     }
 

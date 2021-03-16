@@ -33,8 +33,8 @@ class CreateAbsensiTable extends Migration
             $table->foreign('absensi_cuti_id')->references('id')->on('absensi_cuti')->onDelete('cascade')->onUpdate('cascade'); 
             $table->foreign('shift_id')->references('id')->on('absensi_shift')->onDelete('cascade')->onUpdate('cascade'); 
             
-            $table->foreign('created_by')->references('id')->on('pegawai')->onDelete('cascade')->onUpdate('cascade'); 
-            $table->foreign('updated_by')->references('id')->on('pegawai')->onDelete('cascade')->onUpdate('cascade');  
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade'); 
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

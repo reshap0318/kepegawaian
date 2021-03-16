@@ -18,8 +18,8 @@ class CreatePegawaiPangkatTable extends Migration
             $table->unsignedBigInteger('pegawai_id');
             $table->unsignedBigInteger('pangkat_id');
             $table->date('tmt');
-            $table->string('file_sk');
-            $table->string('status');
+            $table->string('file_sk')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by');
             $table->timestamps();
@@ -28,7 +28,7 @@ class CreatePegawaiPangkatTable extends Migration
             $table->foreign('pangkat_id')->references('id')->on('pangkat_golongan')->onDelete('cascade')->onUpdate('cascade');  
             
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade'); 
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade'); 
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
