@@ -27,7 +27,7 @@
                     </x-nav-link>
                 </div>
                 <!-- Settings Dropdown -->
-                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <div class="hidden sm:flex sm:items-center sm:ml-6" x-show="{{ Auth::user()->hasAnyPermission(['units_access', 'fungsionals_access','pangkat-golongans_access','jabatan-units_access']) ? 'true' : 'false' }}">
                     <x-dropdown width="48">
                         <x-slot name="trigger">
                             <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
@@ -41,16 +41,16 @@
                         </x-slot>
     
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('units.index')" :active="request()->routeIs('units.index')">
+                            <x-dropdown-link :href="route('units.index')" :active="request()->routeIs('units.index')" x-show="{{ Auth::user()->can('units_access') ? 'true' : 'false' }}">
                                 Units
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('fungsionals.index')" :active="request()->routeIs('fungsionals.index')">
+                            <x-dropdown-link :href="route('fungsionals.index')" :active="request()->routeIs('fungsionals.index')" x-show="{{ Auth::user()->can('fungsionals_access') ? 'true' : 'false' }}">
                                 Fungsionals
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('pangkatGolongans.index')" :active="request()->routeIs('pangkatGolongans.index')">
+                            <x-dropdown-link :href="route('pangkatGolongans.index')" :active="request()->routeIs('pangkatGolongans.index')" x-show="{{ Auth::user()->can('pangkat-golongans_access') ? 'true' : 'false' }}">
                                 Pangkat Golongans
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('jabatanUnits.index')" :active="request()->routeIs('jabatanUnits.index')">
+                            <x-dropdown-link :href="route('jabatanUnits.index')" :active="request()->routeIs('jabatanUnits.index')" x-show="{{ Auth::user()->can('jabatan-units_access') ? 'true' : 'false' }}">
                                 jabatan Units
                             </x-dropdown-link>
                         </x-slot>

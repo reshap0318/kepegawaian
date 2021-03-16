@@ -8,6 +8,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
+use App\Models\Pegawai;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
