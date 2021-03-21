@@ -1,66 +1,49 @@
 <div class="mt-4">
     <!-- This example requires Tailwind CSS v2.0+ -->
     <x-slot name="title"> Jabatan Units </x-slot>
-    <x-card>
-        <x-slot name="btn"> 
-            <div class="text-right pb-3">
-                <x-button class="ml-3 normal-case" color="indigo" href="{{ route('jabatanUnits.create') }}">
-                    Tambah
-                </x-button>
+    <x-slot name="header">
+        <div class="max-w-7xl mx-auto pt-2 px-4  sm:px-6 md:px-8">
+            <div class="grid grid-cols-3">
+                <h1 class="text-2xl font-semibold text-gray-900">Jabatan Units</h1>
+                <div class="text-right col-span-2">
+                    <x-form.button class="ml-3 normal-case" color="indigo" href="{{ route('jabatanUnits.create') }}">
+                        Tambah
+                    </x-form.button>
+                </div>
             </div>
-        </x-slot>
-        @if (count($jabatanUnits) > 0)
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Nama
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Unit
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Grade
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Corporate Grade
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Aksi
-                        </th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    @foreach ($jabatanUnits as $jabatanUnit)
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $jabatanUnit->nama }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $jabatanUnit->unit->nama}}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $jabatanUnit->grade}}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $jabatanUnit->corporate_grade}}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <x-button class="normal-case" px="3" py="1" color="indigo" href="{{ route('jabatanUnits.edit',$jabatanUnit) }}">
-                                    Edit
-                                </x-button>
-                                <x-button class="normal-case" px="3" py="1" color="red">
-                                    Delete
-                                </x-button>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>                
-        @else 
-            <div class="p-6 bg-white border-b border-gray-200">
-                Tidak Ada Data Ditemukan
-            </div> 
-        @endif
-    </x-card>
+        </div>
+    </x-slot>
+    @if (count($jabatanUnits) > 0)
+        <x-table.init>
+            <x-table.thead>
+                <tr>
+                    <x-table.th>Nama</x-table.th>
+                    <x-table.th>Unit</x-table.th>
+                    <x-table.th>Grade</x-table.th>
+                    <x-table.th>Corporate Grade</x-table.th>
+                    <x-table.th>Aksi</x-table.th>
+                </tr>
+            </x-table.thead>
+            <x-table.tbody>
+                @foreach ($jabatanUnits as $jabatanUnit)
+                    <x-table.tr>
+                        <x-table.td>{{ $jabatanUnit->nama }}</x-table.td>
+                        <x-table.td>{{ $jabatanUnit->unit->nama }}</x-table.td>
+                        <x-table.td>{{ $jabatanUnit->grade }}</x-table.td>
+                        <x-table.td>{{ $jabatanUnit->corporate_grade }}</x-table.td>
+                        <x-table.td>
+                            <x-form.button class="normal-case" px="3" py="1" color="indigo" href="{{ route('jabatanUnits.edit',$jabatanUnit) }}">
+                                Edit
+                            </x-form.button>
+                            <x-form.button class="normal-case" px="3" py="1" color="red">
+                                Delete
+                            </x-form.button>
+                        </x-table.td>
+                    </x-table.tr>
+                @endforeach
+            </x-table.tbody>
+        </x-table.init>
+    @else
+        <x-card><div class="pt-2">Tidak Ada Data Ditemukan</div></x-card>
+    @endif
 </div>

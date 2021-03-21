@@ -12,8 +12,8 @@ class Edit extends Component
 
     public $isPegawai = true;
     public $user;
-    public $email, $username, $nama, $password, $confirm_password;
-    public $gelar_depan, $gelar_belakang, $unit, $alamat, $geo_alamat, $nip, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $nidn, $npwp, $tipe, $ikatan_kerja, $no_hp, $status, $tanggal_pensiun, $file_sk_cpns, $file_sk_pns;
+    public $email, $username, $password, $confirm_password;
+    public $nama, $gelar_depan, $gelar_belakang, $unit, $alamat, $geo_alamat, $nip, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $nidn, $npwp, $tipe, $ikatan_kerja, $no_hp, $status, $tanggal_pensiun, $file_sk_cpns, $file_sk_pns;
 
     public function mount(User $user)
     {
@@ -23,9 +23,9 @@ class Edit extends Component
         $this->isPegawai = $user->pegawai ? true : false;
         $this->email = $user->email; 
         $this->username = $user->username; 
-        $this->nama = $user->name;
         if($this->isPegawai){
             $pegawai = $user->pegawai;
+            $this->nama = $pegawai->nama;
             $this->gelar_depan = $pegawai->gelar_depan;
             $this->gelar_belakang = $pegawai->gelar_belakang;
             $this->unit = $pegawai->unit_id;
@@ -74,7 +74,6 @@ class Edit extends Component
         $user = $this->user->update([
             'email' => $this->email,
             'username' => $this->username,
-            'name' => $this->nama,
         ]);
 
         return $this->user;
@@ -91,6 +90,7 @@ class Edit extends Component
     public function updatePegawai(User $user)
     {
         $pegawai = $user->pegawai;
+        $pegawai->nama = $this->nama;
         $pegawai->gelar_depan = $this->gelar_depan;
         $pegawai->gelar_belakang = $this->gelar_belakang;
         $pegawai->unit_id = $this->unit;

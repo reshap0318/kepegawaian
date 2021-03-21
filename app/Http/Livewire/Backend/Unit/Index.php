@@ -10,7 +10,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.backend.unit.index',[
-            'units' => Unit::all()
+            'units' => Unit::orderby('parent_unit_id','asc')->get()
         ]);
     }
 }

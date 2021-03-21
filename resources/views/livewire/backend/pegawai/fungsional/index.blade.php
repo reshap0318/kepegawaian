@@ -1,59 +1,60 @@
 <div class="mt-4">
     <x-slot name="title"> Pegawai Fungsional </x-slot>
-    <x-card>
-        <x-slot name="btn"> 
-            <div class="text-right pb-3">
-                <x-button class="ml-3 normal-case" color="indigo" href="{{ route('pegawaiFungsionals.create', $user) }}">
-                    Tambah
-                </x-button>
-            </div>
-        </x-slot>
-        @if (count($pegawaiFungsionals) > 0)
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Fungsional
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            TMT
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Status
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Aksi
-                        </th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    @foreach ($pegawaiFungsionals as $pegawaiFungsional)
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $pegawaiFungsional->fungsional->nama }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $pegawaiFungsional->tmt }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $pegawaiFungsional->status=="0" ? "Belum Verifikasi" : "Terverifikasi" }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <x-button class="normal-case" px="3" py="1" color="indigo" href="{{ route('pegawaiFungsionals.edit',['user'=>$user, 'pegawaiFungsional'=>$pegawaiFungsional]) }}">
-                                    Edit
-                                </x-button>
-                                <x-button class="normal-case" px="3" py="1" color="red">
-                                    Delete
-                                </x-button>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>                
-        @else 
-            <div class="p-6 bg-white border-b border-gray-200">
-                Tidak Ada Data Ditemukan
-            </div> 
-        @endif
-    </x-card>
+    <div class="grid grid-cols-3 pb-3">
+        <h2 id="informasi Fungsional" class="text-lg leading-6 font-medium text-gray-900">Riwayat Fungsional</h2>
+        <div class="text-right col-span-2">
+            <x-form.button px="2" py="1" color="indigo" href="{{ route('pegawaiFungsionals.create', $user) }}">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+            </x-form.button>
+        </div>
+    </div>
+    @if (count($pegawaiFungsionals) > 0)
+        <x-table.init>
+            <x-table.thead>
+                <tr>
+                    <x-table.th><span class="sr-only">status</span></x-table.th>
+                    <x-table.th>Fungsional</x-table.th>
+                    <x-table.th>Tanggal</x-table.th>
+                    <x-table.th>Aksi</x-table.th>
+                </tr>
+            </x-table.thead>
+            <x-table.tbody>
+                @foreach ($pegawaiFungsionals as $pegawaiFungsional)
+                    <x-table.tr>
+                        <td class="pl-6 py-4" style="width: 3px">
+                            @if ($pegawaiFungsional->status)
+                                <span class="h-5 w-5 rounded-full bg-green-500 flex items-center justify-center ring-5 ring-white">
+                                    <!-- Heroicon name: solid/check -->
+                                    <svg class="h-3 w-3 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </span>
+                            @else
+                                <span class="h-5 w-5 rounded-full bg-gray-500 flex items-center justify-center ring-5 ring-white">
+                                    <!-- Heroicon name: solid/check -->
+                                    <svg class="h-3 w-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                            @endif
+                        </td>
+                        <x-table.td>{{ $pegawaiFungsional->fungsional->nama }}</x-table.td>
+                        <x-table.td>{{ $pegawaiFungsional->tmt }}</x-table.td>
+                        <x-table.td>
+                            <x-form.button class="normal-case" px="3" py="1" color="indigo" href="{{ route('pegawaiFungsionals.edit',['user'=>$user, 'pegawaiFungsional'=>$pegawaiFungsional]) }}">
+                                Edit
+                            </x-form.button>
+                            <x-form.button class="normal-case" px="3" py="1" color="red">
+                                Delete
+                            </x-form.button>
+                        </x-table.td>
+                    </x-table.tr>
+                @endforeach
+            </x-table.tbody>
+        </x-table.init>
+    @else
+        <x-card><div class="pt-2">Tidak Ada Data Ditemukan</div></x-card>
+    @endif
 </div>

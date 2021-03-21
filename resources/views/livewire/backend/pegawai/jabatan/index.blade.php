@@ -4,9 +4,9 @@
     <x-card>
         <x-slot name="btn"> 
             <div class="text-right pb-3">
-                <x-button class="ml-3 normal-case" color="indigo" href="{{ route('pegawaiJabatans.create', $user) }}">
+                <x-form.button class="ml-3 normal-case" color="indigo" href="{{ route('pegawaiJabatans.create', $user) }}">
                     Tambah
-                </x-button>
+                </x-form.button>
             </div>
         </x-slot>
         @if (count($pegawaiJabatans) > 0)
@@ -47,12 +47,12 @@
                                 <div class="text-sm text-gray-900">{{ $pegawaiJabatan->status=="0" ? "Belum Verifikasi" : "Terverifikasi" }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <x-button class="normal-case" px="3" py="1" color="indigo" href="{{ route('pegawaiJabatans.edit',['user'=>$user, 'pegawaiJabatan' => $pegawaiJabatan]) }}">
+                                <x-form.button class="normal-case" px="3" py="1" color="indigo" href="{{ route('pegawaiJabatans.edit',['user'=>$user, 'pegawaiJabatan' => $pegawaiJabatan]) }}">
                                     Edit
-                                </x-button>
-                                <x-button class="normal-case" px="3" py="1" color="red">
+                                </x-form.button>
+                                <x-form.button class="normal-case" px="3" py="1" color="red">
                                     Delete
-                                </x-button>
+                                </x-form.button>
                             </td>
                         </tr>
                     @endforeach

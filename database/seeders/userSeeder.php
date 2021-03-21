@@ -15,25 +15,25 @@ class userSeeder extends Seeder
     {
 
         $permissions = [
-            'roles_access', 'roles_manage', 'roles',
-            'units_access', 'units_manage', 'units',
-            'fungsionals_access', 'fungsionals_manage', 'fungsionals',
-            'pangkat-golongans_access', 'pangkat-golongans_manage', 'pangkat-golongans',
-            'jabatan-units_access', 'jabatan-units_manage', 'jabatan-units',
-            'pegawai_access', 'pegawai_manage', 'pegawai',
-            'pegawai-fungsional_access', 'pegawai-fungsional_manage', 'pegawai-fungsional',
-            'pegawai-pangkat_access', 'pegawai-pangkat_manage', 'pegawai-pangkat',
-            'pegawai-jabatan_access', 'pegawai-jabatan_manage', 'pegawai-jabatan',
-            'mutasi_access', 'mutasi_manage', 'mutasi',
+            'roles_access', 'roles_manage',
+            'units_access', 'units_manage',
+            'fungsionals_access', 'fungsionals_manage',
+            'pangkat-golongans_access', 'pangkat-golongans_manage',
+            'jabatan-units_access', 'jabatan-units_manage',
+            'pegawai_access', 'pegawai_manage', 'pegawai_list',
+            'pegawai-fungsional_access', 'pegawai-fungsional_manage',
+            'pegawai-pangkat_access', 'pegawai-pangkat_manage',
+            'pegawai-jabatan_access', 'pegawai-jabatan_manage',
+            'mutasi_access', 'mutasi_manage',
         ];
 
         $permissionAdmin = $permissions;
         $permissionAdminBidang = [
-            'pegawai_access', 'pegawai_manage', 'pegawai',
-            'pegawai-fungsional_access', 'pegawai-fungsional_manage', 'pegawai-fungsional',
-            'pegawai-pangkat_access', 'pegawai-pangkat_manage', 'pegawai-pangkat',
-            'pegawai-jabatan_access', 'pegawai-jabatan_manage', 'pegawai-jabatan',
-            'mutasi_access', 'mutasi_manage', 'mutasi',
+            'pegawai_access', 'pegawai_manage',
+            'pegawai-fungsional_access', 'pegawai-fungsional_manage',
+            'pegawai-pangkat_access', 'pegawai-pangkat_manage',
+            'pegawai-jabatan_access', 'pegawai-jabatan_manage',
+            'mutasi_access', 'mutasi_manage',
         ];
 
         Unit::Create([
@@ -41,7 +41,8 @@ class userSeeder extends Seeder
         ]);
         
         Unit::Create([
-            'nama' => 'Fakultas Teknologi Informasi'
+            'nama' => 'Fakultas Teknologi Informasi',
+            'parent_unit_id' => 1
         ]);
         
 
@@ -55,12 +56,12 @@ class userSeeder extends Seeder
         $adminBidang->givePermissionTo($permissionAdminBidang);
 
         $user = User::create([
-            'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => bcrypt('admin')
         ]);
         Pegawai::create([
             'id' => $user->id,
+            'nama' => 'Admin',
             'unit_id' => 1,
             'nip' => '1234567890',
             'jenis_kelamin' => 1,
@@ -70,16 +71,16 @@ class userSeeder extends Seeder
         $user->assignRole('admin');
 
         $user = User::create([
-            'name' => 'admin2',
-            'email' => 'admin2@asraf.com',
+            'email' => 'admin2@admin2.com',
             'password' => bcrypt('admin2')
         ]);
         Pegawai::create([
             'id' => $user->id,
+            'nama' => 'Admin2',
             'unit_id' => 2,
             'nip' => '1222121213131',
             'jenis_kelamin' => 1,
-            'tempat_lahir' => 'Padang',
+            'tempat_lahir' => 'Jambi',
             'tgl_lahir' => now()
         ]);
         $user->assignRole('admin bidang');

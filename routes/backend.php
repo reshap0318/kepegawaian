@@ -46,8 +46,8 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::middleware(['can:roles_manage'])->group(function () {
             // roles
-            Route::get('permissions/create', PermissionCreate::class)->name('permisssions.create');
-            Route::get('permissions/{permission}/edit', PermissionEdit::class)->name('permisssions.edit');
+            Route::get('permissions/create', PermissionCreate::class)->name('permissions.create');
+            Route::get('permissions/{permission}/edit', PermissionEdit::class)->name('permissions.edit');
     
             // permission
             Route::get('roles/create', RoleCreate::class)->name('roles.create');
@@ -56,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
     
         Route::middleware(['can:roles_access'])->group(function () {
             //roles
-            Route::get('permissions', PermissionIndex::class)->name('permisssions.index');
+            Route::get('permissions', PermissionIndex::class)->name('permissions.index');
             //permission
             Route::get('roles', RoleIndex::class)->name('roles.index');
         });

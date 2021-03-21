@@ -1,18 +1,13 @@
 <x-app-layout>
     <x-slot name="title"> Dashboard </x-slot>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+        <div class="max-w-7xl mx-auto pt-1 px-4  sm:px-6 md:px-8">
+            <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
+        </div>
     </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
-                </div>
-            </div>
+    <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="px-6 py-3 bg-white border border-gray-200">
+            Hello World
         </div>
     </div>
 </x-app-layout>

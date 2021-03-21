@@ -1,8 +1,11 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+            <a href="{{ route('login') }}">
+                <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
+                <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                Forgot Password
+                </h2>
             </a>
         </x-slot>
 
@@ -21,15 +24,15 @@
 
             <!-- Email Address -->
             <div>
-                <x-label for="email" :value="__('Email')" />
+                <x-form.label for="email" :value="__('Email')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-form.input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <x-button>
+                <x-form.button>
                     {{ __('Email Password Reset Link') }}
-                </x-button>
+                </x-form.button>
             </div>
         </form>
     </x-auth-card>

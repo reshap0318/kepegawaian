@@ -10,8 +10,8 @@ use Livewire\Component;
 class Create extends Component
 {
     public $isPegawai = true;
-    public $email, $username, $nama, $password, $confirm_password;
-    public $gelar_depan, $gelar_belakang, $unit, $alamat, $geo_alamat, $nip, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $nidn, $npwp, $tipe, $ikatan_kerja, $no_hp, $status, $tanggal_pensiun, $file_sk_cpns, $file_sk_pns;
+    public $email, $username, $password, $confirm_password;
+    public $nama, $gelar_depan, $gelar_belakang, $unit, $alamat, $geo_alamat, $nip, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $nidn, $npwp, $tipe, $ikatan_kerja, $no_hp, $status, $tanggal_pensiun, $file_sk_cpns, $file_sk_pns;
 
     public function render()
     {
@@ -37,7 +37,6 @@ class Create extends Component
         $user = User::create([
             'email' => $this->email,
             'username' => $this->username,
-            'name' => $this->nama,
             'password' => bcrypt($this->password)
         ]);
 
@@ -48,6 +47,7 @@ class Create extends Component
     {
         $pegawai = new Pegawai();
         $pegawai->id = $user->id;
+        $pegawai->nama = $this->nama;
         $pegawai->gelar_depan = $this->gelar_depan;
         $pegawai->gelar_belakang = $this->gelar_belakang;
         $pegawai->unit_id = $this->unit;

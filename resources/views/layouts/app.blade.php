@@ -12,29 +12,35 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
-
-            @if (isset($header))
-                <!-- Page Heading -->
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div class="h-screen flex overflow-hidden bg-gray-100" x-data="{ openUser: false, openMenu:false }">
+            <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
+            @include('layouts.sidebar-mobile')
+          
+            <!-- Static sidebar for desktop -->
+            @include('layouts.sidebar')
+            <div class="flex flex-col w-0 flex-1 overflow-hidden">
+              @include('layouts.navbar')
+          
+              <main class="flex-1 relative overflow-y-auto focus:outline-none" tabindex="0">
+                <div class="py-2">
+                    @if (isset($header))
                         {{ $header }}
+                    @endif
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                        <!-- Replace with your content -->
+                        {{ $slot }}
+                        <!-- /End replace -->
                     </div>
-                </header>
-            @endif
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot ?? "" }}
-            </main>
+                </div>
+              </main>
+            </div>
         </div>
+
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
         @livewireScripts
     </body>
 </html>
