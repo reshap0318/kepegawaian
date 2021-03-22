@@ -48,6 +48,6 @@ class Edit extends Component
             'updated_by' =>Auth()->user()->id
         ]);
         
-        return redirect()->route('pegawaiFungsionals.index', $this->user);
+        return redirect()->route('pegawai.show', $this->user);
     }
 }

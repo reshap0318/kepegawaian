@@ -39,6 +39,6 @@ class Create extends Component
             'updated_by' =>Auth()->user()->id
         ]);
 
-        return redirect()->route('pegawaiPangkats.index', $this->user);
+        return redirect()->route('pegawai.show', $this->user);
     }
 }

@@ -41,7 +41,7 @@ class Create extends Component
             'created_by' => Auth()->user()->id,
             'updated_by' =>Auth()->user()->id
         ]);
-        return redirect()->route('pegawaiFungsionals.index', $this->user);
+        return redirect()->route('pegawai.show', $this->user);
 
     }
 }

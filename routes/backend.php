@@ -23,6 +23,7 @@ use App\Http\Livewire\Backend\{
     JabatanUnit\Edit as JabatanUnitEdit,
 
     Pegawai\Index as PegawaiIndex,
+    Pegawai\Show as PegawaiShow,
     Pegawai\Create as PegawaiCreate,
     Pegawai\Edit as PegawaiEdit,
     Pegawai\Fungsional\Index as PegawaiFungsionalIndex,
@@ -88,6 +89,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('pegawai')->group(function () {
 
             Route::get('', PegawaiIndex::class)->name('pegawai.index');
+            Route::get('/{user}', PegawaiShow::class)->name('pegawai.show');
             Route::get('/create', PegawaiCreate::class)->name('pegawai.create');
             Route::get('/{user}/edit', PegawaiEdit::class)->name('pegawai.edit');
 
