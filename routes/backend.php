@@ -88,34 +88,34 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('pegawai')->group(function () {
 
-            Route::get('', PegawaiIndex::class)->name('pegawai.index');
-            Route::get('/{user}', PegawaiShow::class)->name('pegawai.show');
-            Route::get('/create', PegawaiCreate::class)->name('pegawai.create');
-            Route::get('/{user}/edit', PegawaiEdit::class)->name('pegawai.edit');
+            Route::get('', PegawaiIndex::class)->middleware('can:pegawai_access')->name('pegawai.index');
+            Route::get('/create', PegawaiCreate::class)->middleware('can:pegawai_manage')->name('pegawai.create');
+            Route::get('/{user}', PegawaiShow::class)->middleware('can:pegawai_access')->name('pegawai.show');
+            Route::get('/{user}/edit', PegawaiEdit::class)->middleware('can:pegawai_manage')->name('pegawai.edit');
 
-            Route::prefix('{user}')->middleware('can:pegawai,user')->group(function () {
+            Route::prefix('{user}')->group(function () {
                 Route::prefix('fungsional')->group(function () {
-                    Route::get('', PegawaiFungsionalIndex::class)->name('pegawaiFungsionals.index');
-                    Route::get('/create', PegawaiFungsionalCreate::class)->name('pegawaiFungsionals.create');
-                    Route::get('/{pegawaiFungsional}/edit', PegawaiFungsionalEdit::class)->name('pegawaiFungsionals.edit');
+                    // Route::get('', PegawaiFungsionalIndex::class)->middleware('can:pegawai-fungsional_access')->name('pegawaiFungsionals.index');
+                    Route::get('/create', PegawaiFungsionalCreate::class)->middleware('can:pegawai-fungsional_manage')->name('pegawaiFungsionals.create');
+                    Route::get('/{pegawaiFungsional}/edit', PegawaiFungsionalEdit::class)->middleware('can:pegawai-fungsional_manage')->name('pegawaiFungsionals.edit');
                 });
     
                 Route::prefix('pangkat')->group(function () {
-                    Route::get('', PegawaiPangkatIndex::class)->name('pegawaiPangkats.index');
-                    Route::get('/create', PegawaiPangkatCreate::class)->name('pegawaiPangkats.create');
-                    Route::get('/{pegawaiPangkat}/edit', PegawaiPangkatEdit::class)->name('pegawaiPangkats.edit');
+                    // Route::get('', PegawaiPangkatIndex::class)->middleware('can:pegawai-pangkat_access')->name('pegawaiPangkats.index');
+                    Route::get('/create', PegawaiPangkatCreate::class)->middleware('can:pegawai-pangkat_manage')->name('pegawaiPangkats.create');
+                    Route::get('/{pegawaiPangkat}/edit', PegawaiPangkatEdit::class)->middleware('can:pegawai-pangkat_manage')->name('pegawaiPangkats.edit');
                 });
     
                 Route::prefix('jabatan')->group(function () {
-                    Route::get('', PegawaiJabatanIndex::class)->name('pegawaiJabatans.index');
-                    Route::get('/create', PegawaiJabatanCreate::class)->name('pegawaiJabatans.create');
-                    Route::get('/{pegawaiJabatan}/edit', PegawaiJabatanEdit::class)->name('pegawaiJabatans.edit');
+                    // Route::get('', PegawaiJabatanIndex::class)->middleware('can:pegawai-jabatan_access')->name('pegawaiJabatans.index');
+                    Route::get('/create', PegawaiJabatanCreate::class)->middleware('can:pegawai-jabatan_manage')->name('pegawaiJabatans.create');
+                    Route::get('/{pegawaiJabatan}/edit', PegawaiJabatanEdit::class)->middleware('can:pegawai-jabatan_manage')->name('pegawaiJabatans.edit');
                 });
 
                 Route::prefix('mutasi')->group(function () {
-                    Route::get('', PegawaiMutasiIndex::class)->name('pegawaiMutasis.index');
-                    Route::get('/create', PegawaiMutasiCreate::class)->name('pegawaiMutasis.create');
-                    Route::get('/{mutasi}/edit', PegawaiMutasiEdit::class)->name('pegawaiMutasis.edit');
+                    // Route::get('', PegawaiMutasiIndex::class)->middleware('can:mutasi_access')->name('pegawaiMutasis.index');
+                    Route::get('/create', PegawaiMutasiCreate::class)->middleware('can:mutasi_manage')->name('pegawaiMutasis.create');
+                    Route::get('/{mutasi}/edit', PegawaiMutasiEdit::class)->middleware('can:mutasi_manage')->name('pegawaiMutasis.edit');
                 });
             });
         });

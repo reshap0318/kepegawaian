@@ -224,18 +224,26 @@
             </div>
         </section>
         <section aria-labelledby="informasi Fungsional2" class="space-y-6">
-            <x-card>
-                <livewire:backend.pegawai.fungsional.index :user="$user" :key="'user-fungsional-'.$user->id">
-            </x-card>
-            <x-card>
-                <livewire:backend.pegawai.jabatan.index :user="$user" :key="'user-jabatan-'.$user->id">
-            </x-card>
-            <x-card>
-                <livewire:backend.pegawai.pangkat.index :user="$user" :key="'user-pangkat-'.$user->id">
-            </x-card>\
-            <x-card>
-                <livewire:backend.pegawai.mutasi.index :user="$user" :key="'user-mutasi-'.$user->id">
-            </x-card>
+            @if (Auth::user()->can('pegawai-fungsional_access'))
+                <x-card>
+                    <livewire:backend.pegawai.fungsional.index :user="$user" :key="'user-fungsional-'.$user->id">
+                </x-card>
+            @endif
+            @if (Auth::user()->can('pegawai-jabatan_access'))
+                <x-card>
+                    <livewire:backend.pegawai.jabatan.index :user="$user" :key="'user-jabatan-'.$user->id">
+                </x-card>
+            @endif
+            @if (Auth::user()->can('pegawai-pangkat_access'))
+                <x-card>
+                    <livewire:backend.pegawai.pangkat.index :user="$user" :key="'user-pangkat-'.$user->id">
+                </x-card>
+            @endif
+            @if (Auth::user()->can('mutasi_access'))
+                <x-card>
+                    <livewire:backend.pegawai.mutasi.index :user="$user" :key="'user-mutasi-'.$user->id">
+                </x-card>
+            @endif
         </section>
     </div>    
 </div>
