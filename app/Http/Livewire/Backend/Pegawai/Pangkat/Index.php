@@ -10,16 +10,11 @@ class Index extends Component
 {
     use AuthorizesRequests;
     
-    public $user;
+    public $user, $pegawaiPangkat;
 
-    public function mount(User $user, PegawaiPangkat $pegawaiPangkat)
+    public function mount(User $user)
     {
         $this->authorize('viewPegawai',$user);
-        
-        $this->pegawaiPangkat = $pegawaiPangkat;
-        $this->pangkat = $pegawaiPangkat->pangkat_id;
-        $this->tmt = $pegawaiPangkat->tmt;
-        $this->file_sk = $pegawaiPangkat->file_sk;
 
         $this->user = $user;
 
@@ -30,5 +25,23 @@ class Index extends Component
         return view('livewire.backend.pegawai.pangkat.index',[
             'pegawaiPangkats' => PegawaiPangkat::where('pegawai_id', $this->user->id)->get()
         ]);
+    }
+
+    public function changeStatus(PegawaiPangkat $pegawaiPangkat)
+    {
+        $pegawaiPangkat->status = $pegawaiPangkat->status ? false : true;
+        $pegawaiPangkat->update();
+    }
+
+    public function deleteModel(PegawaiPangkat $pegawaiPangkat)
+    {
+        $this->pegawaiPangkat = $pegawaiPangkat;
+    }
+
+    public function destroy()
+    {
+        if($this->pegawaiPangkat){
+            $this->pegawaiPangkat->delete();
+        }
     }
 }

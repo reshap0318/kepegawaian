@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Backend\Pegawai\Fungsional;
 
-use Livewire\Component;
+use Livewire\{Component, WithFileUploads};
 use App\Models\{Fungsional,User};
 use App\Models\PegawaiFungsional;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Edit extends Component
 {
     use AuthorizesRequests;
+    use WithFileUploads;
     
     public $pegawaiFungsional, $user;
     public $fungsional, $tmt, $file_sk;
@@ -37,13 +38,21 @@ class Edit extends Component
         $this->validate([
             'fungsional' => 'required',
             'tmt' => 'required',
-            'file_sk' => ''
         ]);
+
+        if($this->file_sk){
+            $this->validate([
+                'file_sk' => 'file|mimes:pdf'
+            ]);
+            $fileName = "surat_keputusan_fungsional_".$this->user->pegawai->nip.".".$this->file_sk->extension();
+            $this->pegawaiFungsional->update([
+                'file_sk'  => $this->file_sk->storeAs('sk_fungsional', $fileName,'public')
+            ]);
+        }
 
         $this->pegawaiFungsional->update([
             'fungsional_id' => $this->fungsional,
             'tmt' => $this->tmt,
-            'file_sk' => $this->file_sk,
             'status' => 1,
             'updated_by' =>Auth()->user()->id
         ]);

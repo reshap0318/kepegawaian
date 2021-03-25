@@ -36,6 +36,10 @@ class userSeeder extends Seeder
             'mutasi_access', 'mutasi_manage',
         ];
 
+        $permissionPegawai = [
+            'pegawai'
+        ];
+
         Unit::Create([
             'nama' => 'Univeristas Andalas'
         ]);
@@ -49,40 +53,66 @@ class userSeeder extends Seeder
         foreach ($permissions as $permission) {
             Permission::create(['name'=>$permission]);
         }
+        Permission::create(['name'=>'pegawai']);
 
         $admin = Role::create(['name'=>'admin']);
         $admin->givePermissionTo($permissionAdmin);
         $adminBidang = Role::create(['name'=>'admin bidang']);
         $adminBidang->givePermissionTo($permissionAdminBidang);
+        $adminBidang = Role::create(['name'=>'pegawai']);
+        $adminBidang->givePermissionTo($permissionPegawai);
 
-        $user = User::create([
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('admin')
-        ]);
-        Pegawai::create([
-            'id' => $user->id,
-            'nama' => 'Admin',
-            'unit_id' => 1,
-            'nip' => '1234567890',
-            'jenis_kelamin' => 1,
-            'tempat_lahir' => 'Padang',
-            'tgl_lahir' => now()
-        ]);
-        $user->assignRole('admin');
+        $datas = [
+            [
+                'email' => 'admin@admin.com',
+                'password' => 'root',
+                'nama' => 'Admin',
+                'unit_id' => 1,
+                'nip' => '1234567890',
+                'jenis_kelamin' => 1,
+                'tempat_lahir' => 'Padang',
+                'tgl_lahir' => now(),
+                'role' => 'admin'
+            ],
+            [
+                'email' => 'admin2@admin.com',
+                'password' => 'root',
+                'nama' => 'Admin2',
+                'unit_id' => 2,
+                'nip' => '1222121213131',
+                'jenis_kelamin' => 1,
+                'tempat_lahir' => 'Jambi',
+                'tgl_lahir' => now(),
+                'role' => 'admin bidang'
+            ],
+            [
+                'email' => 'pegawai@pegawai.com',
+                'password' => 'root',
+                'nama' => 'Pegawai',
+                'unit_id' => 2,
+                'nip' => '122212212312',
+                'jenis_kelamin' => 1,
+                'tempat_lahir' => 'Jambi',
+                'tgl_lahir' => now(),
+                'role' => 'pegawai'
+            ]
+        ];
 
-        $user = User::create([
-            'email' => 'admin2@admin.com',
-            'password' => bcrypt('admin2')
-        ]);
-        Pegawai::create([
-            'id' => $user->id,
-            'nama' => 'Admin2',
-            'unit_id' => 2,
-            'nip' => '1222121213131',
-            'jenis_kelamin' => 1,
-            'tempat_lahir' => 'Jambi',
-            'tgl_lahir' => now()
-        ]);
-        $user->assignRole('admin bidang');
+        foreach ($datas as $data) {
+            $user = User::create([
+                'email' => $data['email'],
+                'password' => bcrypt($data['password'])
+            ]);
+            Pegawai::create([
+                'id' => $user->id,
+                'nama' => $data['nama'],
+                'unit_id' => $data['unit_id'],
+                'nip' => $data['nip'],
+                'jenis_kelamin' => $data['jenis_kelamin'],
+                'tempat_lahir' => $data['tempat_lahir'],
+                'tgl_lahir' => now()
+            ]);
+            $user->assignRole($data['role']);
+        }
     }
 }

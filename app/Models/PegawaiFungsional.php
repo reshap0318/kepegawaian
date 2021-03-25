@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class PegawaiFungsional extends Model
 {
@@ -15,6 +16,15 @@ class PegawaiFungsional extends Model
     protected $fillable = [
         'pegawai_id', 'fungsional_id', 'tmt', 'file_sk', 'status', 'created_by', 'updated_by'
     ]; 
+
+    public function getFileSkUrlAttribute($value)
+    {
+        $patlink = rtrim(app()->basePath('public/storage'), '/');
+        if($this->file_sk && is_dir($patlink) && Storage::disk('public')->exists($this->file_sk)){
+            return url("/storage/".$this->file_sk);
+        }
+        return "";
+    }
 
     public function pegawai()
     {

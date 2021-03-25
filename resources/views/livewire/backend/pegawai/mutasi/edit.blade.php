@@ -1,15 +1,11 @@
 <div>
-    <x-slot name="title"> Update Pegawai Mutasi </x-slot>
-    <x-card>
-      <div class="mt-5 md:mt-0 md:col-span-2">
-        <form wire:submit.prevent="update">
-          <div class="shadow overflow-hidden sm:rounded-md">
-            @include('livewire.backend.pegawai.mutasi._form')
-            <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-              <x-form.button color="indigo"> Simpan </x-form.button>
-            </div>
-          </div>
-        </form>
+  <x-slot name="title"> Update Pegawai Mutasi </x-slot>
+  <x-card>
+    <form wire:submit.prevent="update">
+      @include('livewire.backend.pegawai.mutasi._form')
+      <div class="px-4 py-3 text-right sm:px-6">
+        <x-form.button color="indigo"> Simpan </x-form.button>
       </div>
-    </x-card>
+    </form>
+  </x-card>
 </div>

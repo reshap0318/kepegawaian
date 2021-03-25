@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pegawai extends Model
 {
@@ -16,10 +17,23 @@ class Pegawai extends Model
         'id','nama' ,'gelar_depan', 'gelar_belakang', 'unit_id', 'alamat', 'geo_alamat', 'nip', 'jenis_kelamin', 'tempat_lahir', 'tgl_lahir', 'nidn', 'npwp', 'tipe', 'ikatan_kerja', 'no_hp', 'status', 'tgl_pensiun', 'file_sk_cpns', 'file_sk_pns'
     ]; 
 
+    public static function boot()
+    {
+        parent::boot();
+        self::deleting(function ($model) {
+            if($model->file_sk_cpns){
+                Storage::disk('public')->delete($model->file_sk_cpns);
+            }
+            if($model->file_sk_pns){
+                Storage::disk('public')->delete($model->file_sk_pns);
+            }
+        });
+    }
+
     public const DOSEN = 1;
     public const TENDIK = 2;
 
-    public const JENIS_PEGAWAI = [
+    public const TIPE_PEGAWAI = [
         self::DOSEN => 'Dosen',
         self::TENDIK => 'Tendik'
     ];
@@ -34,11 +48,11 @@ class Pegawai extends Model
         return $this->hasOne(User::class, 'id', 'id');
     }
 
-    public function getJenisPegawaiTextAttribute($value)
+    public function getTipePegawaiTextAttribute($value)
     {
-        if(in_array($this->jenis_pegawai, self::JENIS_PEGAWAI))
+        if(array_key_exists($this->tipe, self::TIPE_PEGAWAI))
         {
-            return self::JENIS_PEGAWAI[$this->jenis_pegawai];
+            return self::TIPE_PEGAWAI[$this->tipe];
         }
         return '';
     }
@@ -53,13 +67,31 @@ class Pegawai extends Model
         return $this->jenis_kelamin ? "Laki - Laki" : "Perempuan";
     }
 
+    public function getFileSkCpnsUrlAttribute($value)
+    {
+        $patlink = rtrim(app()->basePath('public/storage'), '/');
+        if($this->file_sk_cpns && is_dir($patlink) && Storage::disk('public')->exists($this->file_sk_cpns)){
+            return url("/storage/".$this->file_sk_cpns);
+        }
+        return "";
+    }
+
+    public function getFileSkPnsUrlAttribute($value)
+    {
+        $patlink = rtrim(app()->basePath('public/storage'), '/');
+        if($this->file_sk_pns && is_dir($patlink) && Storage::disk('public')->exists($this->file_sk_pns)){
+            return url("/storage/".$this->file_sk_pns);
+        }
+        return "";
+    }
+
     public function isDosen()
     {
-        return $this->jenis_pegawai == self::DOSEN;
+        return $this->tipe_pegawai == self::DOSEN;
     }
 
     public function isTendik()
     {
-        return $this->jenis_pegawai == self::TENDIK;
+        return $this->tipe_pegawai == self::TENDIK;
     }
 }

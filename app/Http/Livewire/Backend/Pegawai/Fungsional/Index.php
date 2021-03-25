@@ -11,15 +11,11 @@ class Index extends Component
 {
     use AuthorizesRequests;
 
-    public $user;
+    public $user, $pegawaiFungsional;
 
     public function mount(User $user,PegawaiFungsional $pegawaiFungsional)
     {
         $this->authorize('viewPegawai',$user);
-        
-        $this->pegawaiFungsional = $pegawaiFungsional;
-        $this->fungsional = $pegawaiFungsional->fungsional_id;
-        $this->tmt = $pegawaiFungsional->tmt;
 
         $this->user = $user;
     }
@@ -29,5 +25,23 @@ class Index extends Component
         return view('livewire.backend.pegawai.fungsional.index',[
             'pegawaiFungsionals' => PegawaiFungsional::where('pegawai_id', $this->user->id)->get()
         ]);
+    }
+
+    public function changeStatus(PegawaiFungsional $pegawaiFungsional)
+    {
+        $pegawaiFungsional->status = $pegawaiFungsional->status ? false : true;
+        $pegawaiFungsional->update();
+    }
+
+    public function deleteModel(PegawaiFungsional $pegawaiFungsional)
+    {
+        $this->pegawaiFungsional = $pegawaiFungsional;
+    }
+
+    public function destroy()
+    {
+        if($this->pegawaiFungsional){
+            $this->pegawaiFungsional->delete();
+        }
     }
 }

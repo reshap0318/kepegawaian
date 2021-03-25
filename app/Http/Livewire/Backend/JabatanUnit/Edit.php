@@ -20,7 +20,6 @@ class Edit extends Component
         $this->unit = $jabatanUnit->unit_id;
     }
 
-
     public function render()
     {
         return view('livewire.backend.jabatan-unit.edit',[

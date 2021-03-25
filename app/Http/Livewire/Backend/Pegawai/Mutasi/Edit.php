@@ -3,12 +3,13 @@
 namespace App\Http\Livewire\Backend\Pegawai\Mutasi;
 
 use App\Models\{User,Mutasi, Unit};
-use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Livewire\{Component, WithFileUploads};
 
 class Edit extends Component
 {
     use AuthorizesRequests;
+    use WithFileUploads;
 
     public $user, $mutasi;
     public $unit, $tanggal_mutasi, $file_sk;
@@ -35,14 +36,22 @@ class Edit extends Component
     {
         $this->validate([
             'unit' => 'required',
-            'tanggal_mutasi' => 'required',
-            'file_sk' => ''
+            'tanggal_mutasi' => 'required'
         ]);
+
+        if($this->file_sk){
+            $this->validate([
+                'file_sk' => 'file|mimes:pdf'
+            ]);
+            $fileName = "surat_keputusan_mutasi_".$this->user->pegawai->nip.".".$this->file_sk->extension();
+            $this->mutasi->update([
+                'file_sk'  => $this->file_sk->storeAs('sk_mutasi', $fileName,'public')
+            ]);
+        }
 
         $this->mutasi->update([
             'unit_id' => $this->unit,
             'tgl_mutasi' => $this->tanggal_mutasi,
-            'file_sk'  => $this->file_sk,
             'status' => 1,
             'updated_by' => Auth()->user()->id
         ]);

@@ -15,6 +15,9 @@ class UserPolicy
 
     public function viewPegawai(User $user, User $other) 
     {
-        return $user->pegawai->unit_id === $other->pegawai->unit_id;
+        if($user->can('pegawai_access')){
+            return $user->pegawai->unit_id === $other->pegawai->unit_id;
+        }
+        return $user->id === $other->id;
     }
 }

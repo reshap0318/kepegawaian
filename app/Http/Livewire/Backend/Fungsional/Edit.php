@@ -29,7 +29,7 @@ class Edit extends Component
             'grade' => 'required'
         ]);
 
-        Fungsional::create([
+        $this->fungsional->update([
             'nama' => $this->nama,
             'grade' => $this->grade
         ]);

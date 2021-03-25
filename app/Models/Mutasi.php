@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Mutasi extends Model
 {
@@ -15,6 +16,25 @@ class Mutasi extends Model
     protected $fillable = [
         'pegawai_id', 'unit_id', 'tgl_mutasi', 'file_sk', 'status', 'created_by', 'updated_by'
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+        self::deleting(function ($model) {
+            if($model->file_sk){
+                Storage::disk('public')->delete($model->file_sk);
+            }
+        });
+    }
+
+    public function getFileSkUrlAttribute($value)
+    {
+        $patlink = rtrim(app()->basePath('public/storage'), '/');
+        if($this->file_sk && is_dir($patlink) && Storage::disk('public')->exists($this->file_sk)){
+            return url("/storage/".$this->file_sk);
+        }
+        return "";
+    }
 
     public function unit()
     {

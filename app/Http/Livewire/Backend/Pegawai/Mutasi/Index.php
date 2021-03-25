@@ -10,23 +10,36 @@ class Index extends Component
 {
     use AuthorizesRequests;
 
-    public $user;
+    public $user, $mutasi;
     
-    public function mount(User $user, Mutasi $mutasi)
+    public function mount(User $user)
     {
         $this->authorize('viewPegawai',$user);
-
         $this->user = $user;
-        $this->mutasi = $mutasi;
-        $this->unit = $mutasi->unit_id;
-        $this->tanggal_mutasi = $mutasi->tgl_mutasi;
-        $this->file_sk = $mutasi->file_sk;
     }
     
     public function render()
     {
         return view('livewire.backend.pegawai.mutasi.index', [
-            'pegawaiMutasis' => Mutasi::all()
+            'pegawaiMutasis' => Mutasi::where('pegawai_id',$this->user->id)->get()
         ]);
+    }
+
+    public function changeStatus(Mutasi $mutasi)
+    {
+        $mutasi->status = $mutasi->status ? false : true;
+        $mutasi->update();
+    }
+
+    public function deleteModel(Mutasi $mutasi)
+    {
+        $this->mutasi = $mutasi;
+    }
+
+    public function destroy()
+    {
+        if($this->mutasi){
+            $this->mutasi->delete();
+        }
     }
 }

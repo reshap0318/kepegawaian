@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Backend\User;
+namespace App\Http\Livewire\Frontend\User;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +16,7 @@ class GantiPassword extends Component
 
     public function render()
     {
-        return view('livewire.backend.user.ganti-password');
+        return view('livewire.frontend.user.ganti-password');
     }
 
     public function update()

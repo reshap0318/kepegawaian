@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Backend\{
-    User\Profile as profile,
     Permission\Index as PermissionIndex,
     Permission\Create as PermissionCreate,
     Permission\Edit as PermissionEdit,
@@ -42,7 +41,6 @@ use App\Http\Livewire\Backend\{
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
-    Route::get('profile', Profile::class)->name('profile');
 
     Route::prefix('admin')->group(function () {
         Route::middleware(['can:roles_manage'])->group(function () {
