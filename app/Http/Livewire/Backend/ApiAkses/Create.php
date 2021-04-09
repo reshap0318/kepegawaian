@@ -25,6 +25,7 @@ class Create extends Component
             'nama' => $this->nama,
             'app_key' => "PUSDAPEG-".Str::random(60)
         ]);
+        session()->flash('success', 'Successfully saved!');
         return redirect()->route('apiAksess.index');
     }
 }

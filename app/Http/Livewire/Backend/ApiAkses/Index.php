@@ -31,6 +31,7 @@ class Index extends Component
     {
         if($this->apiAkses){
             $this->apiAkses->delete();
+            $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Deleted!', 'message' => '']);
         }
     }
 }

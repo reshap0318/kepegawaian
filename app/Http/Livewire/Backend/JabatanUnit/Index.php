@@ -19,7 +19,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.backend.jabatan-unit.index',[
-            'jabatanUnits' => JabatanUnit::where('nama','like','%'.$this->search.'%')->orderby('unit_id','asc')->paginate(5)
+            'jabatanUnits' => JabatanUnit::select('jabatan_unit.*')->with('unit')->leftJoin('unit','jabatan_unit.unit_id','=','unit.id')->where('jabatan_unit.nama','like','%'.$this->search.'%')->orWhere('grade','like','%'.$this->search.'%')->orWhere('corporate_grade','like','%'.$this->search.'%')->orWhere('unit.nama','like','%'.$this->search.'%')->orderby('unit_id','asc')->paginate(5)
             ]);
     }
 

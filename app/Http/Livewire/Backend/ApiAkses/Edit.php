@@ -30,6 +30,7 @@ class Edit extends Component
         $this->apiAkses->update([
             'nama' => $this->nama
         ]);
+        session()->flash('success', 'Successfully updated!');
         return redirect()->route('apiAksess.index');
     }
 }
