@@ -23,6 +23,7 @@ class Create extends Component
             'nama' => $this->nama,
             'golongan' => $this->golongan
         ]);
+        session()->flash('success', 'Successfully saved!');
         return redirect()->route('pangkatGolongans.index');
     }
 }

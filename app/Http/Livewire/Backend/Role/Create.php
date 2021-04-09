@@ -24,6 +24,7 @@ class Create extends Component
         ]);
         $role = Role::create(['name'=>$this->name]);
         $role->givePermissionTo($this->permissions);
+        session()->flash('success', 'Successfully saved!');
         return redirect()->route('roles.index');
     }
 }

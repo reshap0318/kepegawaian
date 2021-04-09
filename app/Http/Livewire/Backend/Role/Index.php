@@ -2,17 +2,24 @@
 
 namespace App\Http\Livewire\Backend\Role;
 
-use Livewire\Component;
+use Livewire\{Component, WithPagination};
 use Spatie\Permission\Models\Role;
 
 class Index extends Component
 {
-    public $role;
+    use WithPagination;
+
+    public $role, $search = '';
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
         return view('livewire.backend.role.index',[
-            'roles' => Role::all()
+            'roles' => Role::where('name','like','%'.$this->search.'%')->paginate(5)
         ]);
     }
 
@@ -25,6 +32,7 @@ class Index extends Component
     {
         if($this->role){
             $this->role->delete();
+            $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Deleted!', 'message' => '']);
         }
     }
 }

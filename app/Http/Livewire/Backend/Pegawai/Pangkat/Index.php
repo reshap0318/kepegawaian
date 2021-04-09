@@ -27,10 +27,16 @@ class Index extends Component
         ]);
     }
 
-    public function changeStatus(PegawaiPangkat $pegawaiPangkat)
+    public function changeStatusModel(PegawaiPangkat $pegawaiPangkat)
     {
-        $pegawaiPangkat->status = $pegawaiPangkat->status ? false : true;
-        $pegawaiPangkat->update();
+        $this->pegawaiPangkat = $pegawaiPangkat;
+    }
+
+    public function changeStatus()
+    {
+        $this->pegawaiPangkat->updated_by = Auth()->user()->id;
+        $this->pegawaiPangkat->status = $this->pegawaiPangkat->status ? false : true;
+        $this->pegawaiPangkat->update();
     }
 
     public function deleteModel(PegawaiPangkat $pegawaiPangkat)
@@ -42,6 +48,7 @@ class Index extends Component
     {
         if($this->pegawaiPangkat){
             $this->pegawaiPangkat->delete();
+            $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Deleted!', 'message' => '']);
         }
     }
 }

@@ -41,20 +41,19 @@ class Edit extends Component
         if($this->file_sk){
             $this->validate([
                 'file_sk' => 'file|mimes:pdf'
-            ]);
-            $fileName = "surat_keputusan_pangkat_".$this->user->pegawai->nip.".".$this->file_sk->extension();
+            ]); 
+            $fileName = explode("/",$this->mutasi->file_sk)[1];
             $this->pegawaiPangkat->update([
                 'file_sk'  => $this->file_sk->storeAs('sk_pangkat', $fileName,'public')
             ]);
         }
-
         $this->pegawaiPangkat->update([
-            'pangkat' => $this->pangkat,
+            'pangkat_id' => $this->pangkat,
             'tmt' => $this->tmt,
             'status' => 0,
             'updated_by' => Auth()->user()->id,
         ]);
-
+        session()->flash('success', 'Successfully updated!');
         return redirect()->route('frontend.pegawai.index');
     }
 

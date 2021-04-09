@@ -3,16 +3,22 @@
 namespace App\Http\Livewire\Backend\Fungsional;
 
 use App\Models\Fungsional;
-use Livewire\Component;
+use Livewire\{Component, WithPagination};
 
 class Index extends Component
 {
-    public $fungsional;
+    use WithPagination;
+    public $fungsional, $search = '';
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
         return view('livewire.backend.fungsional.index',[
-            'fungsionals' => Fungsional::all()
+            'fungsionals' => Fungsional::where('nama','like','%'.$this->search.'%')->orWhere('grade','like','%'.$this->search.'%')->paginate(5)
         ]);
     }
 
@@ -25,6 +31,7 @@ class Index extends Component
     {
         if($this->fungsional){
             $this->fungsional->delete();
+            $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Deleted!', 'message' => '']);
         }
     }
 }

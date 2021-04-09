@@ -37,6 +37,7 @@ class Edit extends Component
             'nama' => $this->nama,
             'parent_unit_id' => $this->parent_unit=="" ? null : $this->parent_unit
         ]);
+        session()->flash('success', 'Successfully updated!');
         return redirect()->route('units.index');
     }
 }

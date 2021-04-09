@@ -13,10 +13,9 @@ class Index extends Component
 
     public $user, $pegawaiFungsional;
 
-    public function mount(User $user,PegawaiFungsional $pegawaiFungsional)
+    public function mount(User $user)
     {
         $this->authorize('viewPegawai',$user);
-
         $this->user = $user;
     }
     
@@ -26,11 +25,16 @@ class Index extends Component
             'pegawaiFungsionals' => PegawaiFungsional::where('pegawai_id', $this->user->id)->get()
         ]);
     }
-
-    public function changeStatus(PegawaiFungsional $pegawaiFungsional)
+    public function changeStatusModel(PegawaiFungsional $pegawaiFungsional)
     {
-        $pegawaiFungsional->status = $pegawaiFungsional->status ? false : true;
-        $pegawaiFungsional->update();
+        $this->pegawaiFungsional = $pegawaiFungsional;
+    }
+
+    public function changeStatus()
+    {
+        $this->pegawaiFungsional->updated_by = Auth()->user()->id;
+        $this->pegawaiFungsional->status = $this->pegawaiFungsional->status ? false : true;
+        $this->pegawaiFungsional->update();
     }
 
     public function deleteModel(PegawaiFungsional $pegawaiFungsional)
@@ -42,6 +46,7 @@ class Index extends Component
     {
         if($this->pegawaiFungsional){
             $this->pegawaiFungsional->delete();
+            $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Deleted!', 'message' => '']);
         }
     }
 }

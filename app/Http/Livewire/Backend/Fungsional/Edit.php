@@ -33,6 +33,7 @@ class Edit extends Component
             'nama' => $this->nama,
             'grade' => $this->grade
         ]);
+        session()->flash('success', 'Successfully updated!');
         return redirect()->route('fungsionals.index');
     }
 }

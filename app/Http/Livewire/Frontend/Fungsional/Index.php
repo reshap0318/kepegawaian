@@ -8,8 +8,8 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    public $user;
-
+    public $user, $pegawaiFungsional;
+    
     public function mount()
     {
         $this->user = Auth::user();
@@ -20,5 +20,18 @@ class Index extends Component
         return view('livewire.frontend.fungsional.index',[
             'pegawaiFungsionals' => PegawaiFungsional::where('pegawai_id', $this->user->id)->get()
         ]);
+    }
+    
+    public function deleteModel(PegawaiFungsional $pegawaiFungsional)
+    {
+        $this->pegawaiFungsional = $pegawaiFungsional;
+    }
+
+    public function destroy()
+    {
+        if($this->pegawaiFungsional){
+            $this->pegawaiFungsional->delete();
+            $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Deleted!', 'message' => '']);
+        }
     }
 }

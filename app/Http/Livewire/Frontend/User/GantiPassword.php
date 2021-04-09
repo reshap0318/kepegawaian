@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Frontend\User;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class GantiPassword extends Component
@@ -12,6 +13,7 @@ class GantiPassword extends Component
     public function mount()
     {
         $this->user = app('auth')->user();
+        $this->user = Auth::user();
     }
 
     public function render()
@@ -32,7 +34,8 @@ class GantiPassword extends Component
             if(Hash::check($password, $userPass)){
                 $this->user->password = Hash::make($this->new_password);
                 $this->user->update();
-                return redirect('dashboard');
+                session()->flash('success', 'Successfully updated!');
+                return redirect()->route('frontend.pegawai.index');
             }else{
                 $this->addError('old_password', 'This Password Not Matching With Old Password');
             }

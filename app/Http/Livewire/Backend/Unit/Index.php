@@ -3,16 +3,23 @@
 namespace App\Http\Livewire\Backend\Unit;
 
 use App\Models\Unit;
-use Livewire\Component;
+use Livewire\{Component, WithPagination};
 
 class Index extends Component
 {
-    public $unit;
+    use WithPagination;
+    
+    public $unit, $search = '';
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
         return view('livewire.backend.unit.index',[
-            'units' => Unit::orderby('parent_unit_id','asc')->get()
+            'units' => Unit::where('nama','like','%'.$this->search.'%')->orWhereRaw("parent_unit_id in (select id from unit where nama like '%$this->search%')")->orderby('parent_unit_id','asc')->paginate(5)
         ]);
     }
 
@@ -25,6 +32,7 @@ class Index extends Component
     {
         if($this->unit){
             $this->unit->delete();
+            $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Deleted!', 'message' => '']);
         }
     }
 }

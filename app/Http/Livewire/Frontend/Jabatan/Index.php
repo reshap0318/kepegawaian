@@ -9,7 +9,7 @@ use App\Models\{PegawaiJabatan, User};
 class Index extends Component
 {
     
-    public $user;
+    public $user, $pegawaiJabatan;
 
     public function mount()
     {
@@ -21,6 +21,19 @@ class Index extends Component
         return view('livewire.frontend.jabatan.index',[
             'pegawaiJabatans' => PegawaiJabatan::where('pegawai_id', $this->user->id)->get()
         ]);
+    }
+
+    public function deleteModel(PegawaiJabatan $pegawaiJabatan)
+    {
+        $this->pegawaiJabatan = $pegawaiJabatan;
+    }
+
+    public function destroy()
+    {
+        if($this->pegawaiJabatan){
+            $this->pegawaiJabatan->delete();
+            $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Deleted!', 'message' => '']);
+        }
     }
 }
 

@@ -5,7 +5,7 @@
         <div class="flex items-center space-x-5">
             <div class="flex-shrink-0">
                 <div class="relative">
-                    <img class="h-16 w-16 rounded-full" src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80" alt="">
+                    <img class="h-16 w-16 rounded-full" src="{{ Auth()->user()->pegawai->avatar_url }}" alt="">
                     <span class="absolute inset-0 shadow-inner rounded-full" aria-hidden="true"></span>
                 </div>
             </div>
@@ -22,7 +22,6 @@
             </a>
         </div>
     </div>
-</div>
 
     <div class="mt-4 mb-4 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
         <div class="space-y-6 lg:col-start-1 lg:col-span-3">
@@ -35,7 +34,7 @@
                         </h2>
                     </div>
                     <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
-                        <dl class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2">
+                        <dl class="grid grid-cols-3 gap-x-4 gap-y-8 sm:grid-cols-3">
                             <div class="sm:col-span-1">
                                 <dt class="text-sm font-medium text-gray-500">
                                     Email
@@ -50,6 +49,14 @@
                                 </dt>
                                 <dd class="mt-1 text-sm text-gray-900">
                                     {{ $user->username ?? "Belum Disetting" }}
+                                </dd>
+                            </div>
+                            <div class="sm:col-span-1">
+                                <dt class="text-sm font-medium text-gray-500">
+                                    Waktu Verifikasi Email
+                                </dt>
+                                <dd class="mt-1 text-sm text-gray-900">
+                                    {{ $user->email_verified_at ?? "Belum Diverifikasi" }}
                                 </dd>
                             </div>
                         </dl>
@@ -211,7 +218,7 @@
                                             </div>
                                             <div class="ml-4 flex-shrink-0 flex items-start space-x-4">
                                                 <a href="#" class="bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500" onclick="document.getElementById('file_sk_pns').click()">
-                                                    Update
+                                                    Update 
                                                 </a>
                                                 <input type="file" wire:model="file_sk_pns" style="display: none" id="file_sk_pns">
                                                 @if ($user->pegawai->file_sk_pns)
@@ -243,6 +250,19 @@
                 <x-card>
                     <livewire:frontend.mutasi.index :key="'user-mutasi-'.$user->id">
                 </x-card>
+            </section>
+
+            <section aria-labelledby="simbol" class="space-y-6">
+                @can(['pegawai'])
+                    <x-crud-simbol>
+                        <x-table.button color="indigo" class="px-3 py-1">
+                            <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                        </x-table.button>
+                        Download
+                    </x-crud-simbol> 
+                @endcan
             </section>
         </div>    
     </div>

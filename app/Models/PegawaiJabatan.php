@@ -17,6 +17,16 @@ class PegawaiJabatan extends Model
         'pegawai_id', 'jabatan_id', 'tgl_mulai', 'tgl_selesai','file_sk', 'status', 'created_by', 'updated_by'
     ]; 
 
+    public static function boot()
+    {
+        parent::boot();
+        self::deleting(function ($model) {
+            if($model->file_sk){
+                Storage::disk('public')->delete($model->file_sk);
+            }
+        });
+    }
+    
     public function getFileSkUrlAttribute($value)
     {
         $patlink = rtrim(app()->basePath('public/storage'), '/');
@@ -34,5 +44,15 @@ class PegawaiJabatan extends Model
     public function pegawai()
     {
         return $this->hasOne(Pegawai::class, 'id', 'pegawai_id');
+    }
+
+    public function createdBy()
+    {
+        return $this->hasOne(Pegawai::class, 'id', 'created_by');
+    }
+
+    public function updatedBy()
+    {
+        return $this->hasOne(Pegawai::class, 'id', 'updated_by');
     }
 }

@@ -22,7 +22,6 @@ class Edit extends Component
         $this->mutasi = $mutasi;
         $this->unit = $mutasi->unit_id;
         $this->tanggal_mutasi = $mutasi->tgl_mutasi;
-        $this->file_sk = $mutasi->file_sk;
     }
 
     public function render()
@@ -43,7 +42,7 @@ class Edit extends Component
             $this->validate([
                 'file_sk' => 'file|mimes:pdf'
             ]);
-            $fileName = "surat_keputusan_mutasi_".$this->user->pegawai->nip.".".$this->file_sk->extension();
+            $fileName = explode("/",$this->mutasi->file_sk)[1];
             $this->mutasi->update([
                 'file_sk'  => $this->file_sk->storeAs('sk_mutasi', $fileName,'public')
             ]);
@@ -55,7 +54,7 @@ class Edit extends Component
             'status' => 1,
             'updated_by' => Auth()->user()->id
         ]);
-
+        session()->flash('success', 'Successfully updated!');
         return redirect()->route('pegawai.show', $this->user);
     }
 }

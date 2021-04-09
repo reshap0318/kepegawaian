@@ -22,6 +22,7 @@ class Create extends Component
         ]);
 
         Permission::create(['name'=>$this->permission]);
-        return redirect()->route('permisssions.index');
+        session()->flash('success', 'Successfully saved!');
+        return redirect()->route('permissions.index');
     }
 }

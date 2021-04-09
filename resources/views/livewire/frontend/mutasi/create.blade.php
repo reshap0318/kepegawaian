@@ -1,5 +1,8 @@
 <div>
   <x-slot name="title"> Tambah Pegawai Mutasi </x-slot>
+  <x-card class="mb-1">     
+    @component('components.form.data-user', ['user' => $user])@endcomponent
+  </x-card>
   <x-card>
     <form wire:submit.prevent="store">
       @include('livewire.frontend.mutasi._form')

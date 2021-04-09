@@ -4,7 +4,7 @@
     <x-form.select wire:model.lazy="jabatan">
         <option value="">--Pilihan--</option>
         @foreach ($jabatanUnits as $jabatanUnit)
-            <option value="{{ $jabatanUnit->id }}">{{ $jabatanUnit->nama }}</option>
+            <option value="{{ $jabatanUnit->id }}">{{ $jabatanUnit->nama.' ('.$jabatanUnit->unit->nama.')' }}</option>
         @endforeach
     </x-form.select>
     <x-form.validation-error name="jabatan"/>

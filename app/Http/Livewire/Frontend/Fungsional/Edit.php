@@ -41,7 +41,7 @@ class Edit extends Component
             $this->validate([
                 'file_sk' => 'file|mimes:pdf'
             ]);
-            $fileName = "surat_keputusan_fungsional_".$this->user->pegawai->nip.".".$this->file_sk->extension();
+            $fileName = explode("/",$this->pegawaiFungsional->file_sk)[1];
             $this->pegawaiFungsional->update([
                 'file_sk'  => $this->file_sk->storeAs('sk_fungsional', $fileName,'public')
             ]);
@@ -53,7 +53,7 @@ class Edit extends Component
             'status' => 0,
             'updated_by' =>Auth()->user()->id
         ]);
-        
+        session()->flash('success', 'Successfully updated!');
         return redirect()->route('frontend.pegawai.index');
     }
 }

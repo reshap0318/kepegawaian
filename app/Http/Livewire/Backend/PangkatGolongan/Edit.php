@@ -33,6 +33,7 @@ class Edit extends Component
             'nama' => $this->nama,
             'golongan' => $this->golongan
         ]);
+        session()->flash('success', 'Successfully updated!');
         return redirect()->route('pangkatGolongans.index');
     }
 }

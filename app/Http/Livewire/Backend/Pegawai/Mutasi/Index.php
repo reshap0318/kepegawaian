@@ -25,10 +25,16 @@ class Index extends Component
         ]);
     }
 
-    public function changeStatus(Mutasi $mutasi)
+    public function changeStatusModel(Mutasi $mutasi)
     {
-        $mutasi->status = $mutasi->status ? false : true;
-        $mutasi->update();
+        $this->mutasi = $mutasi;
+    }
+
+    public function changeStatus()
+    {
+        $this->mutasi->updated_by = Auth()->user()->id;
+        $this->mutasi->status = $this->mutasi->status ? false : true;
+        $this->mutasi->update();
     }
 
     public function deleteModel(Mutasi $mutasi)
@@ -40,6 +46,7 @@ class Index extends Component
     {
         if($this->mutasi){
             $this->mutasi->delete();
+            $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Deleted!', 'message' => '']);
         }
     }
 }

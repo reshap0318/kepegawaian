@@ -1,5 +1,10 @@
 <div>
   <x-slot name="title"> Ubah Role {{ $role->name }} </x-slot>
+  <x-slot name="header">
+      <div class="max-w-7xl mx-auto pt-2 px-4  sm:px-6 md:px-8">
+          <h1 class="text-2xl font-semibold text-gray-900">Ubah Role {{ $role->name }}</h1>
+      </div>
+  </x-slot>
   <div class="pt-2">
     <x-card>
       <form wire:submit.prevent="update">

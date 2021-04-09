@@ -2,9 +2,8 @@
 
 namespace App\Http\Livewire\Backend\Permission;
 
-use Livewire\Component;
 use Spatie\Permission\Models\Permission;
-use Livewire\WithPagination;
+use Livewire\{Component, WithPagination};
 
 class Index extends Component
 {
@@ -34,6 +33,7 @@ class Index extends Component
     {
         if($this->permission){
             $this->permission->delete();
+            $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Deleted!', 'message' => '']);
         }
     }
 }

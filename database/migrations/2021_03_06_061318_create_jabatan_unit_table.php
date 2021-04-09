@@ -18,7 +18,7 @@ class CreateJabatanUnitTable extends Migration
             $table->unsignedBigInteger('unit_id');
             $table->string('nama');
             $table->string('grade');
-            $table->integer('corporate_grade');
+            $table->string('corporate_grade');
             $table->timestamps();
 
             $table->foreign('unit_id')->references('id')->on('unit')->onDelete('cascade')->onUpdate('cascade');

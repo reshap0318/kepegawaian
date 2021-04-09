@@ -8,6 +8,9 @@ use App\Http\Livewire\Backend\{
     Role\Index as RoleIndex,
     Role\Create as RoleCreate,
     Role\Edit as RoleEdit,
+    ApiAkses\Index as ApiAksesIndex,
+    ApiAkses\Create as ApiAksesCreate,
+    ApiAkses\Edit as ApiAksesEdit,
     Unit\Index as UnitIndex,
     Unit\Create as UnitCreate,
     Unit\Edit as UnitEdit,
@@ -44,20 +47,26 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('admin')->group(function () {
         Route::middleware(['can:roles_manage'])->group(function () {
-            // roles
+            // permission
             Route::get('permissions/create', PermissionCreate::class)->name('permissions.create');
             Route::get('permissions/{permission}/edit', PermissionEdit::class)->name('permissions.edit');
-    
-            // permission
+            
+            // roles
             Route::get('roles/create', RoleCreate::class)->name('roles.create');
             Route::get('roles/{role}/edit', RoleEdit::class)->name('roles.edit');
+            
+            // api-akses
+            Route::get('api-akses/create', ApiAksesCreate::class)->name('apiAksess.create')->middleware('can:api-akses_manage');
+            Route::get('api-akses/{apiAkses}/edit', ApiAksesEdit::class)->name('apiAksess.edit')->middleware('can:api-akses_manage');
         });
     
         Route::middleware(['can:roles_access'])->group(function () {
-            //roles
-            Route::get('permissions', PermissionIndex::class)->name('permissions.index');
             //permission
+            Route::get('permissions', PermissionIndex::class)->name('permissions.index'); 
+            //roles
             Route::get('roles', RoleIndex::class)->name('roles.index');
+            //api-akses
+            Route::get('api-akses', ApiAksesIndex::class)->name('apiAksess.index')->middleware('can:api-akses_access');
         });
 
         Route::prefix('units')->group(function () {

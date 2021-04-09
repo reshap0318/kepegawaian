@@ -17,7 +17,7 @@ class Profile extends Component
 
     public function render()
     {
-        return view('livewire.frontend.user.profile');
+        return view('livewire.frontend.user.pegawai.index');
     }
 
     public function updatedFileSkCpns()

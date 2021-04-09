@@ -42,7 +42,7 @@ class Edit extends Component
             'corporate_grade' => $this->corporate_grade,
             'unit_id' => $this->unit
         ]);
-
+        session()->flash('success', 'Successfully updated!');
         return redirect()->route('jabatanUnits.index');
     }
 }

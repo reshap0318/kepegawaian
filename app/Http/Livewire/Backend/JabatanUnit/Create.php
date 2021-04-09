@@ -32,7 +32,7 @@ class Create extends Component
             'corporate_grade' => $this->corporate_grade,
             'unit_id' => $this->unit
         ]);
-
+        session()->flash('success', 'Successfully saved!');
         return redirect()->route('jabatanUnits.index');
     }
 }

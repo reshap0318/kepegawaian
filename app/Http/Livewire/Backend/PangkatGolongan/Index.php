@@ -2,18 +2,25 @@
 
 namespace App\Http\Livewire\Backend\PangkatGolongan;
 
-use Livewire\Component;
+use Livewire\{Component,WithPagination};
 use App\Models\PangkatGolongan;
 
 class Index extends Component
 {
-    public $pangkatGolongan;
+    use WithPagination;
+
+    public $pangkatGolongan, $search = '';
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
         return view('livewire.backend.pangkat-golongan.index',[
-            'pangkatgolongans' => PangkatGolongan::all()
-        ]);
+            'pangkatGolongans' => PangkatGolongan::where('nama','like','%'.$this->search.'%')->orWhere('golongan','like','%'.$this->search.'%')->orderby('golongan','asc')->paginate(5)
+            ]);
     } 
 
     public function deleteModel(PangkatGolongan $pangkatGolongan)
@@ -25,6 +32,7 @@ class Index extends Component
     {
         if($this->pangkatGolongan){
             $this->pangkatGolongan->delete();
+            $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Deleted!', 'message' => '']);
         }
     }
 }

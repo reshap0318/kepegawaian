@@ -20,12 +20,16 @@ class Index extends Component
 
     public function render()
     {
-        $pegawais = Pegawai::with('unit')->where('unit_id',Auth::user()->pegawai->unit_id);
+        $myunit = Auth::user()->pegawai->myUnits();
+        $pegawais = Pegawai::with('unit')->whereIn("unit_id", $myunit);
         if(Auth::user()->can('pegawai_list')){
             $pegawais = Pegawai::with('unit');
         }
         return view('livewire.backend.pegawai.index',[
-            'pegawais' => $pegawais->where('nip','like','%'.$this->search.'%')->whereOr('nama','like','%'.$this->search.'%')->paginate(5)
+            'pegawais' => $pegawais->where(function($query)
+            {
+                $query->where('nip','like','%'.$this->search.'%')->orWhere('nama','like','%'.$this->search.'%');
+            })->orderby('unit_id','asc')->paginate(5)
         ]);
     }
 
@@ -39,6 +43,7 @@ class Index extends Component
         if($this->user){
             $this->user->pegawai->delete();
             $this->user->delete();
+            $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Deleted!', 'message' => '']);
         }
     }
 }

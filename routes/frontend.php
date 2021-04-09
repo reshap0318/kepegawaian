@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Frontend\{
     Index as PegawaiIndex,
-    User\edit as PegawaiEdit,
-    User\Profile as Profile,
+    User\Edit as PegawaiEdit,
+    User\GantiPassword as PegawaiPassword,
     Pangkat\Create as PegawaiPangkatCreate,
     Pangkat\Edit as PegawaiPangkatEdit,
     Mutasi\Create as PegawaiMutasiCreate,
@@ -14,9 +14,8 @@ use App\Http\Livewire\Frontend\{
     Jabatan\Create as PegawaiJabatanCreate,
     Jabatan\Edit as PegawaiJabatanEdit,
 };
-
-Route::get('profile', Profile::class)->name('profile');
-Route::middleware(['auth','can:pegawai'])->prefix('pegawai')->as('frontend.')->group(function () {
+Route::get('/ganti-password', PegawaiPassword::class)->name('frontend.pegawai.password');
+Route::middleware(['auth','can:pegawai'])->prefix('data-diri')->as('frontend.')->group(function () {
     Route::get('', PegawaiIndex::class)->name('pegawai.index');
     Route::get('/edit', PegawaiEdit::class)->name('pegawai.edit');
     

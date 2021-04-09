@@ -22,20 +22,20 @@
                             Master
                         </x-slot>
                         <x-menu.nav-link :href="route('units.index')" :active="request()->routeIs('units.index')" x-show="{{ Auth::user()->can('units_access') ? 'true' : 'false' }}" dropdown="true">
-                            Units
+                            Unit
                         </x-menu.nav-link>
                         <x-menu.nav-link :href="route('fungsionals.index')" :active="request()->routeIs('fungsionals.index')" x-show="{{ Auth::user()->can('fungsionals_access') ? 'true' : 'false' }}" dropdown="true">
-                            Fungsionals
+                            Fungsional
                         </x-menu.nav-link>
                         <x-menu.nav-link :href="route('pangkatGolongans.index')" :active="request()->routeIs('pangkatGolongans.index')" x-show="{{ Auth::user()->can('pangkat-golongans_access') ? 'true' : 'false' }}" dropdown="true">
-                            Pangkat Golongans
+                            Pangkat Golongan
                         </x-menu.nav-link>
                         <x-menu.nav-link :href="route('jabatanUnits.index')" :active="request()->routeIs('jabatanUnits.index')" x-show="{{ Auth::user()->can('jabatan-units_access') ? 'true' : 'false' }}" dropdown="true">
-                            jabatan Units
+                            jabatan Unit
                         </x-menu.nav-link>
                     </x-menu.dropdown>
 
-                    <x-menu.dropdown :active="request()->routeIs('roles.index') || request()->routeIs('permissions.index')" x-show="{{ Auth::user()->hasAnyPermission(['roles_access', 'permissions_access']) ? 'true' : 'false' }}"  style="display: none">
+                    <x-menu.dropdown :active="request()->routeIs('roles.index') || request()->routeIs('permissions.index') || request()->routeIs('api-akses_access')" x-show="{{ Auth::user()->hasAnyPermission(['roles_access','api-akses_access']) ? 'true' : 'false' }}"  style="display: none">
                         <x-slot name="trigger"> 
                             <svg class="text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -43,23 +43,26 @@
                             Autorization
                         </x-slot>
                         <x-menu.nav-link href="{{ route('roles.index') }}" :active="request()->routeIs('roles.index')" dropdown="true" x-show="{{ Auth::user()->can('roles_access') ? 'true' : 'false' }}">
-                            Roles
+                            Role
                         </x-menu.nav-link>
-                        <x-menu.nav-link href="{{ route('permissions.index') }}" :active="request()->routeIs('permissions.index')" dropdown="true" x-show="{{ Auth::user()->can('permissions_access') ? 'true' : 'false' }}">
-                            Permissions
+                        <x-menu.nav-link href="{{ route('permissions.index') }}" :active="request()->routeIs('permissions.index')" dropdown="true" x-show="{{ Auth::user()->can('roles_access') ? 'true' : 'false' }}">
+                            Permission
+                        </x-menu.nav-link>
+                        <x-menu.nav-link href="{{ route('apiAksess.index') }}" :active="request()->routeIs('apiAksess.index')" dropdown="true" x-show="{{ Auth::user()->can('api-akses_access') ? 'true' : 'false' }}">
+                            Api Akses
                         </x-menu.nav-link>
                     </x-menu.dropdown>
                     <x-menu.nav-link :href="route('pegawai.index')" :active="request()->routeIs('pegawai.index')" x-show="{{ Auth::user()->can('pegawai_access') ? 'true' : 'false' }}"  style="display: none">
-                        <svg class="text-gray-300 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
+                        <svg class="text-gray-300 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                          </svg>
                         Pegawai
                     </x-menu.nav-link>
-                    <x-menu.nav-link :href="route('frontend.pegawai.index')" :active="request()->routeIs('frontend.pegawai.index')" x-show="{{ Auth::user()->can('pegawai') && !Auth::user()->can('pegawai_access') ? 'true' : 'false' }}"  style="display: none">
+                    <x-menu.nav-link :href="route('frontend.pegawai.index')" :active="request()->routeIs('frontend.pegawai.index')" x-show="{{ Auth::user()->can('pegawai') ? 'true' : 'false' }}"  style="display: none">
                         <svg class="text-gray-300 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        Pegawai
+                        Data Diri
                     </x-menu.nav-link>
                 </nav>
             </div>

@@ -35,7 +35,7 @@ class Create extends Component
             'file_sk' => 'required|file|mimes:pdf'
         ]);
 
-        $fileName = "surat_keputusan_pangkat_".$this->user->pegawai->nip.".".$this->file_sk->extension();
+        $fileName = uniqid("surat_keputusan_pangkat_".$this->user->pegawai->nip."_").".".$this->file_sk->extension();
 
         PegawaiPangkat::create([
             'pegawai_id' => $this->user->id,
@@ -46,7 +46,7 @@ class Create extends Component
             'created_by' => Auth()->user()->id,
             'updated_by' =>Auth()->user()->id
         ]);
-
+        session()->flash('success', 'Successfully saved!');
         return redirect()->route('pegawai.show', $this->user);
     }
 }

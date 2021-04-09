@@ -26,6 +26,7 @@ class Create extends Component
             'nama' => $this->nama,
             'parent_unit_id' => $this->parent_unit
         ]);
+        session()->flash('success', 'Successfully saved!');
         return redirect()->route('units.index');
     }
 }

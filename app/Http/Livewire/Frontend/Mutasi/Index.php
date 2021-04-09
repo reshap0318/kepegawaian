@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
-    public $user;
+    public $user, $mutasi;
     
     public function mount()
     {
@@ -20,5 +20,18 @@ class Index extends Component
         return view('livewire.frontend.mutasi.index', [
             'pegawaiMutasis' => Mutasi::where('pegawai_id',Auth::id())->get()
         ]);
+    }
+
+    public function deleteModel(Mutasi $mutasi)
+    {
+        $this->mutasi = $mutasi;
+    }
+
+    public function destroy()
+    {
+        if($this->mutasi){
+            $this->mutasi->delete();
+            $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Deleted!', 'message' => '']);
+        }
     }
 }

@@ -23,10 +23,11 @@ class Edit extends Component
     public function update()
     {
         $this->validate([
-            'permission' => 'required|unique:permissions,name,'.$this->permission->id,
+            'permission' => 'required|unique:permissions,name,'.$this->mPermission->id,
         ]);
 
         $this->mPermission->update(['name'=>$this->permission]);
-        return redirect()->route('permisssions.index');
+        session()->flash('success', 'Successfully updated!');
+        return redirect()->route('permissions.index');
     }
 }

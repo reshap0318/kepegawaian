@@ -45,4 +45,14 @@ class Mutasi extends Model
     {
         return $this->hasOne(Pegawai::class, 'id', 'pegawai_id');
     }
+
+    public function createdBy()
+    {
+        return $this->hasOne(Pegawai::class, 'id', 'created_by');
+    }
+
+    public function updatedBy()
+    {
+        return $this->hasOne(Pegawai::class, 'id', 'updated_by');
+    }
 }

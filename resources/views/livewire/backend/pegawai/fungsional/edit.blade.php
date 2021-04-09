@@ -1,5 +1,8 @@
 <div>
   <x-slot name="title"> Ubah Pegawai Fungsional </x-slot>
+  <x-card class="mb-1">     
+    @component('components.form.data-user', ['user' => $user])@endcomponent
+  </x-card>
   <x-card>
       <form wire:submit.prevent="update">
           @include('livewire.backend.pegawai.fungsional._form')

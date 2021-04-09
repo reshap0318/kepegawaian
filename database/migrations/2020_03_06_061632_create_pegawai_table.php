@@ -16,6 +16,7 @@ class CreatePegawaiTable extends Migration
         Schema::create('pegawai', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
             $table->string('nama');
+            $table->string('avatar')->nullable();
             $table->string('gelar_depan')->nullable();
             $table->string('gelar_belakang')->nullable();
             $table->unsignedBigInteger('unit_id');
@@ -27,8 +28,8 @@ class CreatePegawaiTable extends Migration
             $table->date('tgl_lahir');
             $table->string('nidn')->nullable();
             $table->string('npwp')->nullable();
-            $table->string('tipe')->nullable();
-            $table->boolean('ikatan_kerja')->default(false);
+            $table->string('tipe')->default(0);
+            $table->boolean('ikatan_kerja')->default(0);
             $table->string('no_hp')->nullable();
             $table->tinyInteger('status')->nullable();
             $table->date('tgl_pensiun')->nullable();

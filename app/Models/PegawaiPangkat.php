@@ -38,11 +38,21 @@ class PegawaiPangkat extends Model
     
     public function pegawai()
     {
-        return $this->belongsTo('App\Pegawai', 'pegawai_id', 'id');
+        return $this->hasOne(Pegawai::class, 'id', 'pegawai_id');
     }
 
     public function pangkatGolongan()
     {
         return $this->belongsTo(pangkatGolongan::class, 'pangkat_id', 'id');
+    }
+
+    public function createdBy()
+    {
+        return $this->hasOne(Pegawai::class, 'id', 'created_by');
+    }
+
+    public function updatedBy()
+    {
+        return $this->hasOne(Pegawai::class, 'id', 'updated_by');
     }
 }

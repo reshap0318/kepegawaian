@@ -22,13 +22,19 @@ class Index extends Component
     {
         return view('livewire.backend.pegawai.jabatan.index',[
             'pegawaiJabatans' => PegawaiJabatan::where('pegawai_id', $this->user->id)->get()
-        ]);
+            ]);
+        }
+        
+    public function changeStatusModel(PegawaiJabatan $pegawaiJabatan)
+    {
+        $this->pegawaiJabatan = $pegawaiJabatan;
     }
 
-    public function changeStatus(PegawaiJabatan $pegawaiJabatan)
+    public function changeStatus()
     {
-        $pegawaiJabatan->status = $pegawaiJabatan->status ? false : true;
-        $pegawaiJabatan->update();
+        $this->pegawaiJabatan->updated_by = Auth()->user()->id;
+        $this->pegawaiJabatan->status = $this->pegawaiJabatan->status ? false : true;
+        $this->pegawaiJabatan->update();
     }
 
     public function deleteModel(PegawaiJabatan $pegawaiJabatan)
@@ -40,6 +46,7 @@ class Index extends Component
     {
         if($this->pegawaiJabatan){
             $this->pegawaiJabatan->delete();
+            $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Deleted!', 'message' => '']);
         }
     }
 }

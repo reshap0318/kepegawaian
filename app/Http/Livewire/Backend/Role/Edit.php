@@ -30,7 +30,8 @@ class Edit extends Component
             'name' => 'required|unique:roles,name,'.$this->role->id
         ]);
         $this->role->update(['name'=>$this->name]);
-        $this->role->givePermissionTo($this->permissions);
+        $this->role->syncPermissions($this->permissions);
+        session()->flash('success', 'Successfully updated!');
         return redirect()->route('roles.index');
     }
 }
