@@ -12,4 +12,4 @@
 
 ## user
 - email : admin@admin.com
-- password : admin
+- password : root
