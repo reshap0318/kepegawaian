@@ -59,7 +59,7 @@ class Pegawai extends Model
 
     public function getNamaLengkapAttribute($value)
     {
-        return $this->gelar_depan." ".$this->nama." ".$this->gelar_belakang;
+        return $this->gelar_depan."".$this->nama."".$this->gelar_belakang;
     }
 
     public function getJenisKelaminTextAttribute($value)
