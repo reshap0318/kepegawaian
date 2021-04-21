@@ -143,7 +143,8 @@ class Pegawai extends Model
                 and @pv := concat(@pv, ',', id)) or id = $unit_id"
             ));
         }else{
-            $units = [1,2,3,4,5,6,7,8,9,10,11,12,13];
+            $units = [];
+            $hasil = [1,2,3,4,5,6,7,8,9,10,11,12,13];
         }
         
         foreach ($units as $unit) {
