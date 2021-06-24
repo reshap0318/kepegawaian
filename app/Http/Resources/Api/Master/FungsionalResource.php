@@ -11,10 +11,8 @@ class FungsionalResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'unit_id' => $this->unit_id,
             'nama' => $this->nama,
-            'grade' => $this->grade,
-            'corporate_grade' => $this->corporate_grade
+            'grade' => $this->grade
         ];
     }
 }

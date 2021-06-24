@@ -24,10 +24,11 @@
 
 <div class="px-4 pt-3">
     <x-form.label for="file_sk" value="File Sk" />
-    <x-form.input wire:model.lazy="file_sk" id="file_sk" class="block mt-1 w-full" type="file" autocomplete="off"/>
+    <x-form.input wire:model="file_sk" id="file_sk" class="block mt-1 w-full" type="file" autocomplete="off"/>
     @if (Request::is('*edit'))
         <a href="{{ $pegawaiJabatan->file_sk_url }}" target="blank" class="block font-medium text-sm text-blue-700">{{ $pegawaiJabatan->file_sk }}</a>
     @endif
+    <div wire:loading wire:target="file_sk">Uploading...</div>
     <x-form.validation-error name="file_sk"/>
 </div>
 

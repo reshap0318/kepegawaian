@@ -20,6 +20,14 @@ class FungsionalController extends Controller
 
     public function show(Fungsional $fungsional)
     {
-        return new FungsionalResource($fungsional);
+        return response()->json([
+            'data' => [
+                'id' => $fungsional->id,
+                'nama' => $fungsional->nama,
+                'grade' => $fungsional->grade,
+                'created_at' => $fungsional->created_at,
+                'updated_at' => $fungsional->updated_at,
+            ]
+        ]);
     }
 }

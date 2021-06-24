@@ -40,7 +40,15 @@
         </div>
 
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script>
+            var userId = "{{ Auth::id() }}";
+
+            Echo.private(`App.Models.User.`+userId).notification((notification) => {
+                Livewire.emit('fetchNotify');
+            });
+
+        </script>
         @livewireScripts
     </body>
 </html>

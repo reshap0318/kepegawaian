@@ -20,6 +20,19 @@ class JabatanUnitController extends Controller
 
     public function show(JabatanUnit $jabatanUnit)
     {
-        return new JabatanUnitResource($jabatanUnit);
+        return response()->json([
+            'id' => $jabatanUnit->id,
+            'unit' => $jabatanUnit->unit->nama,
+            'nama' => $jabatanUnit->nama,
+            'grade' => $jabatanUnit->grade,
+            'corporate_grade' => $jabatanUnit->corporate_grade,
+            'parent' => [
+                'id' => $jabatanUnit->parent->id,
+                'nama' => $jabatanUnit->parent->nama,
+                'unit' => $jabatanUnit->parent ? $jabatanUnit->parent->unit->nama : ""
+            ],
+            'created_at' => $jabatanUnit->created_at,
+            'updated_at' => $jabatanUnit->updated_at,
+        ]);
     }
 }

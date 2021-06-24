@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire\Frontend\Pangkat;
 
+use Illuminate\Support\Facades\{Auth, Notification};
+use App\Notifications\userNotification;
 use Livewire\{Component, WithFileUploads};
-use App\Models\{PangkatGolongan, PegawaiPangkat};
-use Illuminate\Support\Facades\Auth;
+use App\Models\{PangkatGolongan, PegawaiPangkat, User};
 
 class Create extends Component
 {
@@ -44,6 +45,12 @@ class Create extends Component
             'created_by' => Auth()->user()->id,
             'updated_by' =>Auth()->user()->id
         ]);
+        $data = [
+            'pesan' => 'User '.$this->user->pegawai->nama.' Melakukan Pengajuan Riwayat Pangkat',
+            'link' => route('pegawai.show', $this->user)
+        ];
+        $adminUnit = User::adminUnit($this->user->pegawai->myParent())->get();
+        Notification::send($adminUnit, new userNotification($data));
         session()->flash('success', 'Successfully saved!');
         return redirect()->route('frontend.pegawai.index');
     }

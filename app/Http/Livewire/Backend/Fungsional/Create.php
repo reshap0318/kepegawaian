@@ -17,7 +17,7 @@ class Create extends Component
     public function store()
     {
         $this->validate([
-            'nama' => 'required',
+            'nama' => 'required|unique:fungsional,nama',
             'grade' => 'required'
         ]);
 

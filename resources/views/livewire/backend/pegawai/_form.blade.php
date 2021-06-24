@@ -214,12 +214,14 @@
                         </div>
                     
                         <div class="col-span-12 sm:col-span-3">
-                            <div class="flex items-start sm:pt-8">
-                                <div class="flex items-center">
-                                    <x-form.input wire:model.lazy="ikatan_kerja" id="ikatan_kerja" type="checkbox"/>
-                                    <x-form.label class="ml-3" for="ikatan_kerja" value="Ikatan Kerja?" />
-                                </div>
-                            </div>
+                            <x-form.label for="ikatan_kerja" value="Ikatan Kerja" />
+                            <x-form.select wire:model.lazy="ikatan_kerja">
+                                <option value="">--Pilihan--</option>
+                                @foreach ($ikatans as $key => $value)
+                                    <option value="{{ $key }}">{{ $value }}</option>                         
+                                @endforeach
+                            </x-form.select>
+                            <x-form.validation-error name="ikatan_kerja"/>
                         </div>
 
                         <div class="col-span-12 sm:col-span-6">
@@ -232,19 +234,21 @@
                     
                         <div class="col-span-12 sm:col-span-3">
                             <x-form.label for="file_sk_cpns" value="File SK CPNS" />
-                            <x-form.input wire:model.lazy="file_sk_cpns" id="file_sk_cpns" class="block mt-1 w-full" type="file" autocomplete="off"/>
+                            <x-form.input wire:model="file_sk_cpns" id="file_sk_cpns" class="block mt-1 w-full" type="file" autocomplete="off"/>
                             @if (Request::is('*edit'))
                                 <a href="{{ $user->pegawai->file_sk_cpns_url }}" target="blank" class="font-medium text-sm text-blue-700">{{ $user->pegawai->file_sk_cpns }}</a>
                             @endif
+                            <div wire:loading wire:target="file_sk_cpns">Uploading...</div>
                             <x-form.validation-error name="file_sk_cpns"/>
                         </div>
                     
                         <div class="col-span-12 sm:col-span-3">
                             <x-form.label for="file_sk_pns" value="File SK PNS" />
-                            <x-form.input wire:model.lazy="file_sk_pns" id="file_sk_pns" class="block mt-1 w-full" type="file" autocomplete="off"/>
+                            <x-form.input wire:model="file_sk_pns" id="file_sk_pns" class="block mt-1 w-full" type="file" autocomplete="off"/>
                             @if (Request::is('*edit'))
                                 <a href="{{ $user->pegawai->file_sk_pns_url }}" target="blank" class="block font-medium text-sm text-blue-700">{{ $user->pegawai->file_sk_pns }}</a>
                             @endif
+                            <div wire:loading wire:target="file_sk_pns">Uploading...</div>
                             <x-form.validation-error name="file_sk_pns"/>
                         </div>
                     </div>

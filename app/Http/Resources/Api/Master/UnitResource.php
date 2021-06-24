@@ -11,7 +11,7 @@ class UnitResource extends JsonResource
         return [
             'id' => $this->id,
             'nama' => $this->nama,
-            'parent_id' => $this->parent ? $this->parent->nama : null
+            'parent' => $this->parent->only('id','nama')
         ];
     }
 }

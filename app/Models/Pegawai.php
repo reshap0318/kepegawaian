@@ -38,6 +38,16 @@ class Pegawai extends Model
         self::TENDIK => 'Tendik'
     ];
 
+    public const TETAPNS = 1;
+    public const NONTETAPNS = 2;
+    public const DOSENLUARBIASA = 3;
+
+    public const IKATAN_PEGAWAI = [
+        self::TETAPNS => 'Pegawai Tetap PNS',
+        self::NONTETAPNS => 'Pegawai Tetap Non PNS',
+        self::DOSENLUARBIASA => 'Dosen Luar Biasa'
+    ];
+
     public function unit()
     {
         return $this->hasOne(Unit::class, 'id', 'unit_id');
@@ -53,6 +63,15 @@ class Pegawai extends Model
         if(array_key_exists($this->tipe, self::TIPE_PEGAWAI))
         {
             return self::TIPE_PEGAWAI[$this->tipe];
+        }
+        return '';
+    }
+
+    public function getIkatanPegawaiTextAttribute($value)
+    {
+        if(array_key_exists($this->ikatan_kerja, self::IKATAN_PEGAWAI))
+        {
+            return self::IKATAN_PEGAWAI[$this->ikatan_kerja];
         }
         return '';
     }
@@ -104,6 +123,21 @@ class Pegawai extends Model
         return $this->tipe_pegawai == self::TENDIK;
     }
 
+    public function isTetapns()
+    {
+        return $this->ikatan_pegawai == self::TETAPNS;
+    }
+
+    public function isNontetapns()
+    {
+        return $this->ikatan_pegawai == self::NONTETAPNS;
+    }
+
+    public function isDosenluarbiasa()
+    {
+        return $this->ikatan_pegawai == self::DOSENLUARBIASA;
+    }
+
     public function jabatans()
     {
         return $this->hasMany(PegawaiJabatan::class, 'pegawai_id', 'id');
@@ -150,6 +184,18 @@ class Pegawai extends Model
         foreach ($units as $unit) {
             array_push($hasil, $unit->id);
         }
+
+        return $hasil;
+    }
+
+    public function myParent()
+    {
+        $hasil = [1];
+        $unit =  $this->user->pegawai->unit;
+        do {
+            array_push($hasil, $unit->id);
+            $unit = $unit->parent;
+        } while ($unit->parent->id);
 
         return $hasil;
     }

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Unit extends Model
 {
@@ -18,7 +18,9 @@ class Unit extends Model
 
     public function parent()
     {
-        return $this->hasOne(Unit::class,'id','parent_unit_id');
+        return $this->hasOne(Unit::class,'id','parent_unit_id')->withDefault([
+            'nama' => 'Master' 
+        ]);
     }
 
     public function childrens()

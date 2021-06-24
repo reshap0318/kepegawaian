@@ -29,7 +29,7 @@ class CreatePegawaiTable extends Migration
             $table->string('nidn')->nullable();
             $table->string('npwp')->nullable();
             $table->string('tipe')->default(0);
-            $table->boolean('ikatan_kerja')->default(0);
+            $table->tinyInteger('ikatan_kerja')->default(0);
             $table->string('no_hp')->nullable();
             $table->tinyInteger('status')->nullable();
             $table->date('tgl_pensiun')->nullable();

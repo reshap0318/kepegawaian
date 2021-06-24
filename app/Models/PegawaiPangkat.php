@@ -43,7 +43,7 @@ class PegawaiPangkat extends Model
 
     public function pangkatGolongan()
     {
-        return $this->belongsTo(pangkatGolongan::class, 'pangkat_id', 'id');
+        return $this->belongsTo(PangkatGolongan::class, 'pangkat_id', 'id');
     }
 
     public function createdBy()

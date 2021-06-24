@@ -1,4 +1,4 @@
-<div class="mt-3">
+<div class="">
     <p class="text-base font-mediud text-gray-600">Simbol :</p>
     <div class="pl-4 space-x-4">
         {{ $slot ?? "" }}

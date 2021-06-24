@@ -64,6 +64,7 @@ class Edit extends Component
         return view('livewire.backend.pegawai.edit',[
             'units' => Unit::all(),
             'tipes' => Pegawai::TIPE_PEGAWAI,
+            'ikatans' => Pegawai::IKATAN_PEGAWAI,
             'roles' => Auth::user()->hasRole('admin') ? Role::all() : Role::whereNotIn('id',[1])->get()
         ]);
     }
@@ -118,7 +119,7 @@ class Edit extends Component
         $pegawai->nidn = $this->nidn;
         $pegawai->npwp = $this->npwp;
         $pegawai->tipe = $this->tipe;
-        $pegawai->ikatan_kerja = $this->ikatan_kerja ? true : false;
+        $pegawai->ikatan_kerja = $this->ikatan_kerja;
         $pegawai->no_hp = $this->no_hp;
         $pegawai->status = $this->status;
         $pegawai->tgl_pensiun = $this->tanggal_pensiun;

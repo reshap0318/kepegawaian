@@ -19,7 +19,7 @@ class CreateUnitTable extends Migration
             $table->unsignedBigInteger('parent_unit_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('parent_unit_id')->references('id')->on('unit')->onDelete('cascade')->onUpdate('cascade');   
+            $table->foreign('parent_unit_id')->references('id')->on('unit')->onDelete('cascade')->onUpdate('cascade ');   
 
         });
     }

@@ -19,9 +19,12 @@ class CreateJabatanUnitTable extends Migration
             $table->string('nama');
             $table->string('grade');
             $table->string('corporate_grade');
+            $table->unsignedBigInteger('parent_jabatan_unit_id')->nullable();
+
             $table->timestamps();
 
             $table->foreign('unit_id')->references('id')->on('unit')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('parent_jabatan_unit_id')->references('id')->on('unit')->onDelete('cascade')->onUpdate('cascade ');   
         });
     }
 

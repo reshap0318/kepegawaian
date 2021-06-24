@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Frontend\Fungsional;
 
+use App\Models\{Fungsional, PegawaiFungsional, User};
+use Illuminate\Support\Facades\{Auth, Notification};
+use App\Notifications\userNotification;
 use Livewire\{Component, WithFileUploads};
-use App\Models\PegawaiFungsional;
-use App\Models\Fungsional;
-use Illuminate\Support\Facades\Auth;
 
 class Create extends Component
 {
@@ -37,14 +37,21 @@ class Create extends Component
         $fileName = uniqid("surat_keputusan_fungsional_".$this->user->pegawai->nip."_").".".$this->file_sk->extension();
 
         PegawaiFungsional::create([
-            'pegawai_id' => Auth()->user()->id,
+            'pegawai_id' => $this->user->id,
             'fungsional_id' => $this->fungsional,
             'tmt' => $this->tmt,
             'file_sk' => $this->file_sk->storeAs('sk_fungsional', $fileName,'public'),
             'status' => 0,
-            'created_by' => Auth()->user()->id,
-            'updated_by' =>Auth()->user()->id
+            'created_by' => $this->user->id,
+            'updated_by' =>$this->user->id
         ]);
+        $data = [ 
+            'pesan' => 'User '.$this->user->pegawai->nama.' Melakukan Pengajuan Riwayat Fungsional',
+            'link' => route('pegawai.show', $this->user)
+        ];
+        $adminUnit = User::adminUnit($this->user->pegawai->myParent())->get();
+        Notification::send($adminUnit, new userNotification($data));
+        
         session()->flash('success', 'Successfully saved!');
         return redirect()->route('frontend.pegawai.index');
 

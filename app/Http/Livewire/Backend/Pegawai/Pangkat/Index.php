@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Backend\Pegawai\Pangkat;
 
 use Livewire\Component;
 use App\Models\{PegawaiPangkat, User};
+use App\Notifications\userNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Index extends Component
@@ -37,6 +38,12 @@ class Index extends Component
         $this->pegawaiPangkat->updated_by = Auth()->user()->id;
         $this->pegawaiPangkat->status = $this->pegawaiPangkat->status ? false : true;
         $this->pegawaiPangkat->update();
+
+        $data = [
+            'pesan' => $this->pegawaiPangkat->status ? 'Pengajuan Riwayat Pangkat Anda Telah disetujui Oleh Admin' : 'Pengajuan Riwayat Pangkat Anda Tidak disetujui Oleh Admin',
+            'link' => $this->user->hasAnyRole(1, 2) ? route('pegawai.show', $this->user) : route('frontend.pegawai.index')
+        ];
+        $this->user->notify(new userNotification($data));
     }
 
     public function deleteModel(PegawaiPangkat $pegawaiPangkat)

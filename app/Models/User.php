@@ -33,4 +33,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(Pegawai::class, 'id', 'id');
     }
+
+    public function scopeAdminUnit($query, $units)
+    {
+        return $query->select('users.*')->role(['admin unit', 'admin'])->join('pegawai','users.id','=','pegawai.id')->whereIn('unit_id',$units);
+    }
 }

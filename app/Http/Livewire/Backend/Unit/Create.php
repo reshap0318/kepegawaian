@@ -19,7 +19,8 @@ class Create extends Component
     public function store()
     {
         $this->validate([
-            'nama' => 'required|unique:unit,nama'
+            'nama' => 'required|unique:unit,nama',
+            'parent_unit' => 'required'
         ]);
 
         Unit::create([

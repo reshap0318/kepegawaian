@@ -26,7 +26,8 @@ class Edit extends Component
     public function update()
     {
         $this->validate([
-            'nama' => 'required|unique:unit,nama,'.$this->unit->id
+            'nama' => 'required|unique:unit,nama,'.$this->unit->id,
+            'parent_unit' => 'required'
         ]);
 
         if($this->unit->id == $this->parent_unit){

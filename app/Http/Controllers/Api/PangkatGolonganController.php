@@ -20,6 +20,8 @@ class PangkatGolonganController extends Controller
 
     public function show(PangkatGolongan $pangkatGolongan)
     {
-        return new PangkatGolonganResource($pangkatGolongan);
+        return response()->json([
+            'data' => $pangkatGolongan
+        ]);
     }
 }

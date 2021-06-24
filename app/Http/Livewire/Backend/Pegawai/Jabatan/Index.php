@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Backend\Pegawai\Jabatan;
 
 use Livewire\Component;
 use App\Models\{PegawaiJabatan, User};
+use App\Notifications\userNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Index extends Component
@@ -22,7 +23,7 @@ class Index extends Component
     {
         return view('livewire.backend.pegawai.jabatan.index',[
             'pegawaiJabatans' => PegawaiJabatan::where('pegawai_id', $this->user->id)->get()
-            ]);
+        ]);
         }
         
     public function changeStatusModel(PegawaiJabatan $pegawaiJabatan)
@@ -35,6 +36,12 @@ class Index extends Component
         $this->pegawaiJabatan->updated_by = Auth()->user()->id;
         $this->pegawaiJabatan->status = $this->pegawaiJabatan->status ? false : true;
         $this->pegawaiJabatan->update();
+
+        $data = [
+            'pesan' => $this->pegawaiJabatan->status ? 'Pengajuan Riwayat Jabatan Anda Telah disetujui Oleh Admin' : 'Pengajuan Riwayat Jabatan Anda Tidak disetujui Oleh Admin',
+            'link' => $this->user->hasAnyRole(1, 2) ? route('pegawai.show', $this->user) : route('frontend.pegawai.index')
+        ];
+        $this->user->notify(new userNotification($data));
     }
 
     public function deleteModel(PegawaiJabatan $pegawaiJabatan)

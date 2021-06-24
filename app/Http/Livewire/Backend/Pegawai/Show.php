@@ -33,6 +33,7 @@ class Show extends Component
         $this->user->pegawai->file_sk_cpns = $this->file_sk_cpns->storeAs('sk_cpns', $fileName,'public');
         $this->user->pegawai->update();
         $this->user = $this->user;
+        $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Updated!', 'message' => '']);
     }
 
     public function updatedFileSkPns()
@@ -45,5 +46,6 @@ class Show extends Component
         $this->user->pegawai->file_sk_pns = $this->file_sk_pns->storeAs('sk_pns', $fileName,'public');
         $this->user->pegawai->update(); 
         $this->user = $this->user;
+        $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Updated!', 'message' => '']);
     }
 }

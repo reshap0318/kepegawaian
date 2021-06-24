@@ -2,8 +2,9 @@
 
 namespace App\Http\Livewire\Frontend\Mutasi;
 
-use App\Models\{Mutasi, Unit};
-use Illuminate\Support\Facades\Auth;
+use App\Models\{Mutasi, Unit, User};
+use Illuminate\Support\Facades\{Auth, Notification};
+use App\Notifications\userNotification;
 use Livewire\{Component, WithFileUploads};
 
 class Edit extends Component
@@ -51,6 +52,12 @@ class Edit extends Component
             'status' => 0,
             'updated_by' => Auth()->user()->id
         ]);
+        $data = [
+            'pesan' => 'User '.$this->user->pegawai->nama.' Melakukan Perubahan Riwayat Mutasi',
+            'link' => route('pegawai.show', $this->user)
+        ];
+        $adminUnit = User::adminUnit($this->user->pegawai->myParent())->get();
+        Notification::send($adminUnit, new userNotification($data));
         session()->flash('success', 'Successfully updated!');
         return redirect()->route('frontend.pegawai.index');
     }

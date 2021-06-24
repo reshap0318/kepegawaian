@@ -26,3 +26,14 @@
     </x-form.select>
     <x-form.validation-error name="unit"/>
 </div>
+
+<div class="px-4 pt-3">
+    <x-form.label for="parent_jabatan_unit" value="Jabatan Unit Parent" />
+    <x-form.select wire:model.lazy="parent_jabatan_unit">
+        <option value="">--Master--</option>
+        @foreach ($jabatanUnits as $jabatanUnit)
+            <option value="{{ $jabatanUnit->id }}">{{ $jabatanUnit->nama.' ('.$jabatanUnit->unit->nama.')' }}</option>
+        @endforeach
+    </x-form.select>
+    <x-form.validation-error name="parent_jabatan_unit"/>
+</div>

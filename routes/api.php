@@ -11,9 +11,6 @@ use App\Http\Controllers\Api\{
 };
 
 Route::middleware(['api_key'])->group(function () {
-    Route::get('pegawai', [PegawaiController::class, 'index']);
-    Route::get('pegawai/{pegawai}', [PegawaiController::class, 'show']);
-
     Route::get('pangkat-golongan', [PangkatGolonganController::class, 'index']);
     Route::get('pangkat-golongan/{pangkatGolongan}', [PangkatGolonganController::class, 'show']);
 

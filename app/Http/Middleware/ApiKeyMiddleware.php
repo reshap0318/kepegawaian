@@ -18,7 +18,7 @@ class ApiKeyMiddleware
     public function handle(Request $request, Closure $next)
     {
         if($request->bearerToken()){
-            if(ApiAkses::where('api_key',$request->bearerToken())->first()){
+            if(ApiAkses::where('app_key',$request->bearerToken())->first()){
                 return $next($request);
             }
         }

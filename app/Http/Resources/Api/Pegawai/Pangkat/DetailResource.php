@@ -10,7 +10,7 @@ class DetailResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'pangkat' => $this->pangkat->nama,
+            'pangkat' => $this->pangkatGolongan->nama,
             'tmt' => $this->tmt,
             'status' => $this->status,
             'file_sk' => $this->file_sk_url,

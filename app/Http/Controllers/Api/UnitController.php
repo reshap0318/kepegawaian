@@ -20,6 +20,14 @@ class UnitController extends Controller
 
     public function show(Unit $unit)
     {
-        return new UnitResource($unit);
+        return response()->json([
+            'data' => [
+                'id' => $unit->id,
+                'nama' => $unit->nama,
+                'parent' => $unit->parent->only('id','nama'),
+                'created_at' => $unit->created_at,
+                'updated_at' => $unit->updated_at,
+            ]
+        ]);
     }
 }

@@ -2,8 +2,9 @@
 
 namespace App\Http\Livewire\Backend\Pegawai\Mutasi;
 
-use App\Models\{Mutasi, User};
 use Livewire\Component;
+use App\Models\{Mutasi, User};
+use App\Notifications\userNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Index extends Component
@@ -35,6 +36,12 @@ class Index extends Component
         $this->mutasi->updated_by = Auth()->user()->id;
         $this->mutasi->status = $this->mutasi->status ? false : true;
         $this->mutasi->update();
+
+        $data = [
+            'pesan' => $this->mutasi->status ? 'Pengajuan Riwayat Mutasi Anda Telah disetujui Oleh Admin' : 'Pengajuan Riwayat Mutasi Anda Tidak disetujui Oleh Admin',
+            'link' => $this->user->hasAnyRole(1, 2) ? route('pegawai.show', $this->user) : route('frontend.pegawai.index')
+        ];
+        $this->user->notify(new userNotification($data));
     }
 
     public function deleteModel(Mutasi $mutasi)

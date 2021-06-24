@@ -11,8 +11,15 @@ class JabatanUnitResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'unit' => $this->unit->nama,
             'nama' => $this->nama,
-            'grade' => $this->grade
+            'grade' => $this->grade,
+            'corporate_grade' => $this->corporate_grade,
+            'parent' => [
+                'id' => $this->parent->id,
+                'nama' => $this->parent->nama,
+                'unit' => $this->parent ? $this->parent->unit->nama : ""
+            ],
         ];
     }
 }

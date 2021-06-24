@@ -3,8 +3,9 @@
 namespace App\Http\Livewire\Backend\Pegawai\Fungsional;
 
 use App\Models\User;
-use App\Models\PegawaiFungsional;
 use Livewire\Component;
+use App\Models\PegawaiFungsional;
+use App\Notifications\userNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Index extends Component
@@ -35,6 +36,12 @@ class Index extends Component
         $this->pegawaiFungsional->updated_by = Auth()->user()->id;
         $this->pegawaiFungsional->status = $this->pegawaiFungsional->status ? false : true;
         $this->pegawaiFungsional->update();
+
+        $data = [
+            'pesan' => $this->pegawaiFungsional->status ? 'Pengajuan Riwayat Fungsional Anda Telah disetujui Oleh Admin' : 'Pengajuan Riwayat Fungsional Anda Tidak disetujui Oleh Admin',
+            'link' => $this->user->hasAnyRole(1, 2) ? route('pegawai.show', $this->user) : route('frontend.pegawai.index')
+        ];
+        $this->user->notify(new userNotification($data));
     }
 
     public function deleteModel(PegawaiFungsional $pegawaiFungsional)

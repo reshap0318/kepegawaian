@@ -126,7 +126,7 @@
                                     NIDN
                                 </dt>
                                 <dd class="mt-1 text-sm text-gray-900">
-                                    {{ $user->pegawai->nidn ?? "Belun Disetting" }}
+                                    {{ $user->pegawai->nidn ?? "Belum Disetting" }}
                                 </dd>
                             </div>
                             <div class="sm:col-span-1">
@@ -134,7 +134,7 @@
                                     NPWP
                                 </dt>
                                 <dd class="mt-1 text-sm text-gray-900">
-                                    {{ $user->pegawai->npwp ?? "Belun Disetting" }}
+                                    {{ $user->pegawai->npwp ?? "Belum Disetting" }}
                                 </dd>
                             </div>
                             <div class="sm:col-span-1">
@@ -142,7 +142,7 @@
                                     Tipe
                                 </dt>
                                 <dd class="mt-1 text-sm text-gray-900">
-                                    {{ $user->pegawai->tipe_pegawai_text ?? "Belun Disetting" }}
+                                    {{ $user->pegawai->tipe_pegawai_text ?? "Belum Disetting" }}
                                 </dd>
                             </div>
                             <div class="sm:col-span-1">
@@ -150,7 +150,7 @@
                                     Ikatan Kerja
                                 </dt>
                                 <dd class="mt-1 text-sm text-gray-900">
-                                    {{ $user->pegawai->ikatan_kerja ? "Ya" : "Tidak" }}
+                                    {{ $user->pegawai->ikatan_pegawai_text ?? "Belum Disetting" }}
                                 </dd>
                             </div>
                             <div class="sm:col-span-1">
@@ -158,7 +158,7 @@
                                     Tanggal Pensiun
                                 </dt>
                                 <dd class="mt-1 text-sm text-gray-900">
-                                    {{ $user->pegawai->tgl_pensiun ?? "Belun Disetting" }}
+                                    {{ $user->pegawai->tgl_pensiun ?? "Belum Disetting" }}
                                 </dd>
                             </div>
                             <div class="sm:col-span-1">
@@ -166,7 +166,7 @@
                                     Status
                                 </dt>
                                 <dd class="mt-1 text-sm text-gray-900">
-                                    {{ $user->pegawai->status ?? "Belun Disetting" }}
+                                    {{ $user->pegawai->status ?? "Belum Disetting" }}
                                 </dd>
                             </div>
                             <div class="sm:col-span-3">
@@ -174,7 +174,7 @@
                                     Alamat
                                 </dt>
                                 <dd class="mt-1 text-sm text-gray-900">
-                                    {{ $user->pegawai->alamat ?? "Belun Disetting" }}
+                                    {{ $user->pegawai->alamat ?? "Belum Disetting" }}
                                 </dd>
                             </div>
                             <div class="sm:col-span-3">

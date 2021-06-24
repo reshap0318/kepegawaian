@@ -25,6 +25,7 @@ use App\Models\{
     PegawaiPangkat,
     Mutasi
 };
+use Illuminate\Support\Facades\Auth;
 
 class PegawaiController extends Controller
 {
