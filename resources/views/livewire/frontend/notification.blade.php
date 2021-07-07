@@ -25,7 +25,7 @@
         x-transition:leave-end="transform opacity-0 scale-95" style="display: none;">
             <div class="overflow-y-auto h-full py-2">
                 @forelse ($notifys as $notify)
-                    <a href="#" class="flex items-center px-4 py-3 border-b {{ $notify->read_at ? "" : "bg-gray-200" }}" wire:click="markRead('{{ $notify->id }}', '{{ $notify->data['link'] }}')">
+                    <a href="#" class="flex items-center px-4 py-3 border-b {{ $notify->read_at ? "" : "bg-gray-200" }}" wire:click="markRead('{{ $notify->id }}', '{{ $notify->data['user_id'] }}')">
                         <p class="text-gray-600 text-sm mx-2">
                             {{ $notify->data['pesan'] }}, {{ $notify->created_at->diffForHumans() }}
                         </p>

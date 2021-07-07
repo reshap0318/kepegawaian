@@ -67,7 +67,7 @@ class Pegawai extends Model
         return '';
     }
 
-    public function getIkatanPegawaiTextAttribute($value)
+    public function getTipeIkatanTextAttribute($value)
     {
         if(array_key_exists($this->ikatan_kerja, self::IKATAN_PEGAWAI))
         {
@@ -78,7 +78,7 @@ class Pegawai extends Model
 
     public function getNamaLengkapAttribute($value)
     {
-        return $this->gelar_depan."".$this->nama."".$this->gelar_belakang;
+        return $this->gelar_depan." ".$this->nama." ".$this->gelar_belakang;
     }
 
     public function getJenisKelaminTextAttribute($value)
@@ -125,17 +125,17 @@ class Pegawai extends Model
 
     public function isTetapns()
     {
-        return $this->ikatan_pegawai == self::TETAPNS;
+        return $this->tipe_ikatan == self::TETAPNS;
     }
 
     public function isNontetapns()
     {
-        return $this->ikatan_pegawai == self::NONTETAPNS;
+        return $this->tipe_ikatan == self::NONTETAPNS;
     }
 
     public function isDosenluarbiasa()
     {
-        return $this->ikatan_pegawai == self::DOSENLUARBIASA;
+        return $this->tipe_ikatan == self::DOSENLUARBIASA;
     }
 
     public function jabatans()

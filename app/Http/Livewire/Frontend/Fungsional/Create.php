@@ -47,7 +47,7 @@ class Create extends Component
         ]);
         $data = [ 
             'pesan' => 'User '.$this->user->pegawai->nama.' Melakukan Pengajuan Riwayat Fungsional',
-            'link' => route('pegawai.show', $this->user)
+            'user_id' => $this->user->id
         ];
         $adminUnit = User::adminUnit($this->user->pegawai->myParent())->get();
         Notification::send($adminUnit, new userNotification($data));

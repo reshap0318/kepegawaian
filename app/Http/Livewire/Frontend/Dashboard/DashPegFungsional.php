@@ -11,7 +11,7 @@ class DashPegFungsional extends Component
     public function render()
     {
         return view('livewire.frontend.dashboard.dash-peg-fungsional',[
-            'pegawaiFungsionals' => PegawaiFungsional::whereIn('id',Auth::user()->pegawai->myUnits())->count('id')
+            'pegawaiFungsionals' => PegawaiFungsional::whereIn('id' , Auth::user()->pegawai->myUnits())->count('id')
         ]);
     }
 }

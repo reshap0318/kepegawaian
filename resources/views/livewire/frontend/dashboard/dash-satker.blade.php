@@ -1,3 +1,4 @@
+<li class="col-span-1 flex shadow-sm rounded-md">
 <x-box x-show="show" style="display: none">
     <x-slot name="slot">
       {{ $units }} Satuan Kerja
@@ -6,3 +7,4 @@
     
     <x-slot name="initial"> TSK </x-slot>
   </x-box>
+</li>

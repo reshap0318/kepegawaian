@@ -152,7 +152,7 @@
                                     Ikatan Kerja
                                 </dt>
                                 <dd class="mt-1 text-sm text-gray-900">
-                                    {{ $user->pegawai->ikatan_kerja_pegawai_text }}
+                                    {{ $user->pegawai->ikatan_kerja ? $user->pegawai->tipe_ikatan_text : "Belum Disetting" }}
                                 </dd>
                             </div>
                             <div class="sm:col-span-1">

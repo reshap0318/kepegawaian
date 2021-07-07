@@ -9,23 +9,30 @@ class Notification extends Component
 {
     public $totalNotify = 0;
     public $notifys = [];
+    public $user;
+
+    public function mount()
+    {
+        $this->user = Auth::user();
+    }
 
     protected $listeners = ['fetchNotify'];
 
     public function fetchNotify()
     {
-        $this->totalNotify = Auth::user()->unreadNotifications->count();
-        $this->notifys = Auth::user()->notifications;
+        $this->totalNotify =  $this->user->unreadNotifications->count();
+        $this->notifys =  $this->user->notifications;
     }
 
-    public function markRead($id, $link=null)
+    public function markRead($id, $user_id=null)
     {
-        Auth::user()->unreadNotifications->map(function($n) use($id) {
+         $this->user->unreadNotifications->map(function($n) use($id) {
             if($n->id == $id){
                 $n->markAsRead();
             }
         });
         $this->fetchNotify();
+        $link = $this->user->hasAnyRole(1, 2) ? route('pegawai.show', $user_id) : route('frontend.pegawai.index');
         return redirect($link);
     }
 

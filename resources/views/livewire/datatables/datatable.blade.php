@@ -29,6 +29,16 @@
             <div class="flex items-center space-x-1">
                 <x-icons.cog wire:loading class="h-9 w-9 animate-spin text-gray-400" />
 
+                @if (isset($createLink))
+                    <div class="ml-2">
+                        <x-table.button class="inline-flex items-center px-4 py-1.5 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 px-1.5" color="indigo" href="{{ $createLink }}">
+                            <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Tambah
+                        </x-table.button>
+                    </div>
+                @endif
                 @if($exportable)
                 <div x-data="{ init() {
                     window.livewire.on('startDownload', link => window.open(link,'_blank'))

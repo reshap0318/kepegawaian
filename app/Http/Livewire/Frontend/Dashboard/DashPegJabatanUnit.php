@@ -11,7 +11,7 @@ class DashPegJabatanUnit extends Component
     public function render()
     {
         return view('livewire.frontend.dashboard.dash-peg-jabatan',[
-            'pegawaiJabatans' => PegawaiJabatan::whereIn('id',Auth::user()->pegawai->myUnits())->count('id')
+            'pegawaiJabatans' => PegawaiJabatan::whereIn('id' , Auth::user()->pegawai->myUnits())->count('id')
         ]);
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Backend\Pegawai;
 
-use Livewire\{Component,WithPagination};
 use App\Models\{Pegawai, User};
 use Illuminate\Support\Facades\Auth;
+use Livewire\{Component,WithPagination};
 
 class Index extends Component
 {

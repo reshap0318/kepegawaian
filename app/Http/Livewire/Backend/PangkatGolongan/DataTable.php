@@ -11,9 +11,11 @@ class DataTable extends LivewireDatatable
 {
     public $model = PangkatGolongan::class;
 
+    public $createLink = "";
+
     public function delete($id)
     {
-        $this->model::destroy($id);
+        $this->model::destroy($id); 
         $this->dispatchBrowserEvent('notification', ['type' => 'success', 'title' => 'Successfully Deleted!', 'message' => '']);
     }
 

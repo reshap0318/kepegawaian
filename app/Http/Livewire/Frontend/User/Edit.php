@@ -52,7 +52,7 @@ class Edit extends Component
         return view('livewire.frontend.user.edit',[
             'units' => Unit::all(),
             'tipes' => Pegawai::TIPE_PEGAWAI,
-            'ikatans' => Pegawai::IKATAN_KERJA
+            'ikatans' => Pegawai::IKATAN_PEGAWAI
         ]);
     }
     

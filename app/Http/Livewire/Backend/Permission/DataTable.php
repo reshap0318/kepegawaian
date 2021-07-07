@@ -11,6 +11,8 @@ class DataTable extends LivewireDatatable
 {
     public $model = Permission::class;
 
+    public $createLink = "";
+
     public function delete($id)
     {
         $this->model::destroy($id);

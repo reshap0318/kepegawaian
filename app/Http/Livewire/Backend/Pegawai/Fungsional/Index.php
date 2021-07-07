@@ -39,7 +39,7 @@ class Index extends Component
 
         $data = [
             'pesan' => $this->pegawaiFungsional->status ? 'Pengajuan Riwayat Fungsional Anda Telah disetujui Oleh Admin' : 'Pengajuan Riwayat Fungsional Anda Tidak disetujui Oleh Admin',
-            'link' => $this->user->hasAnyRole(1, 2) ? route('pegawai.show', $this->user) : route('frontend.pegawai.index')
+            'user_id' => $this->user->id
         ];
         $this->user->notify(new userNotification($data));
     }
