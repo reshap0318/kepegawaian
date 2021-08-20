@@ -21,9 +21,11 @@ class CreateAbsensiKoreksiTable extends Migration
             $table->timestamp('waktu_koreksi');
             $table->unsignedBigInteger('atasan_id');
             $table->unsignedBigInteger('pejabat_id');
+            $table->date('tgl_persetujuan_atasan')->nullable();
+            $table->date('tgl_persetujuan_pejabat')->nullable();
             $table->timestamps();
 
-            $table->foreign('absensi_id')->references('id')->on('pegawai')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('absensi_id')->references('id')->on('absensi')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('atasan_id')->references('id')->on('pegawai')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('pejabat_id')->references('id')->on('pegawai')->onDelete('cascade')->onUpdate('cascade');
         });

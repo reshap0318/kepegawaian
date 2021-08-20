@@ -24,10 +24,10 @@ class CreateAbsensiCutiTable extends Migration
             $table->text('alasan');
             $table->string('status_pengajuan');
             $table->unsignedBigInteger('atasan_id');
-            $table->date('tgl_persetujuan_atasan');
+            $table->date('tgl_persetujuan_atasan')->nullable();
             $table->unsignedBigInteger('pejabat_id');
-            $table->date('tgl_persetujuan_pejabat');
-            $table->string('file_surat');
+            $table->date('tgl_persetujuan_pejabat')->nullable();
+            $table->string('file_surat')->nullable();
             $table->timestamps();
 
             $table->foreign('pegawai_id')->references('id')->on('pegawai')->onDelete('cascade')->onUpdate('cascade');
