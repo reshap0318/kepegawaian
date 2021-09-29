@@ -101,7 +101,7 @@ class Pegawai extends Model
         if($this->avatar && is_dir($patlink) && Storage::disk('public')->exists($this->avatar)){
             return url("/storage/".$this->avatar);
         }
-        return "https://uxwing.com/wp-content/themes/uxwing/download/12-people-gesture/avatar.png";
+        return "https://www.pngarts.com/files/11/Avatar-PNG-Picture.png";
     }
 
     public function getFileSkPnsUrlAttribute($value)

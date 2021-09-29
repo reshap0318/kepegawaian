@@ -23,7 +23,7 @@ class DataTable extends LivewireDatatable
     {
         $col = [
             Column::name('name')->searchable(),
-            Column::name('permissions.name')->searchable()->view('livewire.backend.role.permission-row'),
+            Column::name('permissions.name')->view('livewire.backend.role.permission-row'),
         ];
 
         $action = Column::callback(['id', 'name'], function ($id, $name) {
