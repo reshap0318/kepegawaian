@@ -17,6 +17,7 @@ class CreateApiAksesTable extends Migration
             $table->id();
             $table->string('nama');
             $table->string('app_key');
+            $table->string('token');
             $table->timestamps();
         });
     }

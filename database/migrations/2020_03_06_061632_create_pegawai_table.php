@@ -31,6 +31,7 @@ class CreatePegawaiTable extends Migration
             $table->string('tipe')->default(0);
             $table->tinyInteger('ikatan_kerja')->default(0);
             $table->string('no_hp')->nullable();
+            $table->string('email')->unique();
             $table->tinyInteger('status')->nullable();
             $table->date('tgl_pensiun')->nullable();
             $table->string('file_sk_cpns')->nullable();
@@ -38,9 +39,9 @@ class CreatePegawaiTable extends Migration
             $table->timestamps();
 
 
-            $table->foreign('id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');   
-            $table->foreign('unit_id')->references('id')->on('unit')->onDelete('cascade')->onUpdate('cascade');   
-            
+            $table->foreign('id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('unit_id')->references('id')->on('unit')->onDelete('cascade')->onUpdate('cascade');
+
             $table->primary('id');
         });
     }

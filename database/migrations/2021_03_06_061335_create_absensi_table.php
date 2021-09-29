@@ -19,22 +19,27 @@ class CreateAbsensiTable extends Migration
             $table->date('tanggal');
             $table->string('tipe_absen');
             $table->unsignedBigInteger('absensi_cuti_id')->nullable();
-            $table->unsignedBigInteger('shift_id');
-            $table->string('status');
-            $table->time('waktu_masuk');
-            $table->time('waktu_keluar');
-            $table->integer('pengurangan_remun');
-            $table->text('keterangan');
+            $table->unsignedBigInteger('shift_id')->nullable();
+            $table->string('status')->nullable();
+            $table->time('waktu_masuk')->nullable();
+            $table->time('waktu_keluar')->nullable();
+            $table->time('waktu_terlambat')->nullable();
+            $table->time('waktu_mendahului')->nullable();
+            $table->integer('pengurangan_remun')->nullable();
+            $table->text('keterangan')->nullable();
             $table->unsignedBigInteger('created_by');
-            $table->unsignedBigInteger('updated_by');
+            $table->unsignedBigInteger('updated_masuk_by')->nullable();
+            $table->unsignedBigInteger('updated_keluar_by')->nullable();
+
             $table->timestamps();
 
             $table->foreign('pegawai_id')->references('id')->on('pegawai')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('absensi_cuti_id')->references('id')->on('absensi_cuti')->onDelete('cascade')->onUpdate('cascade'); 
-            $table->foreign('shift_id')->references('id')->on('absensi_shift')->onDelete('cascade')->onUpdate('cascade'); 
-            
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade'); 
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('absensi_cuti_id')->references('id')->on('absensi_cuti')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('shift_id')->references('id')->on('absensi_shift')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->foreign('created_by')->references('id')->on('pegawai')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('updated_masuk_by')->references('id')->on('pegawai')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('updated_keluar_by')->references('id')->on('pegawai')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
