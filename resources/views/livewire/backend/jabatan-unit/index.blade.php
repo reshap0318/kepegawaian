@@ -9,12 +9,12 @@
     @can('jabatan-units_manage')
         @livewire(App\Http\Livewire\Backend\JabatanUnit\DataTable::class, [
             "createLink" => route('jabatanUnits.create'),
-            "perPage" => 5
+            "perPage" => 25
         ])
     @else
         @livewire(App\Http\Livewire\Backend\JabatanUnit\DataTable::class, [
             "createLink" => "",
-            "perPage" => 5
+            "perPage" => 25
         ])
     @endcan
     @can('jabatan-units_manage')

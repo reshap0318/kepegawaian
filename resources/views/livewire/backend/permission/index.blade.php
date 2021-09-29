@@ -9,12 +9,12 @@
     @can('roles_manage')
         @livewire(App\Http\Livewire\Backend\Permission\DataTable::class, [
             "createLink" => route('roles.create'),
-            "perPage" => 5
+            "perPage" => 25
         ])
     @else
         @livewire(App\Http\Livewire\Backend\Permission\DataTable::class, [
             "createLink" => "",
-            "perPage" => 5
+            "perPage" => 25
         ])
     @endcan
     @can('roles_manage')

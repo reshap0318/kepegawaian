@@ -38,21 +38,29 @@ class Mutasi extends Model
 
     public function unit()
     {
-        return $this->hasOne(Unit::class, 'id', 'unit_id');
+        return $this->hasOne(Unit::class, 'id', 'unit_id')->withDefault([
+            'nama' => '',
+        ]);
     }
 
     public function pegawai()
     {
-        return $this->hasOne(Pegawai::class, 'id', 'pegawai_id');
+        return $this->hasOne(Pegawai::class, 'id', 'pegawai_id')->withDefault([
+            'nama' => '',
+        ]);
     }
 
     public function createdBy()
     {
-        return $this->hasOne(Pegawai::class, 'id', 'created_by');
+        return $this->hasOne(Pegawai::class, 'id', 'created_by')->withDefault([
+            'nama' => '',
+        ]);
     }
 
     public function updatedBy()
     {
-        return $this->hasOne(Pegawai::class, 'id', 'updated_by');
+        return $this->hasOne(Pegawai::class, 'id', 'updated_by')->withDefault([
+            'nama' => '',
+        ]);
     }
 }

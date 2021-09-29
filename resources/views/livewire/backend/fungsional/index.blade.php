@@ -9,12 +9,12 @@
     @can('fungsionals_manage')  
         @livewire(App\Http\Livewire\Backend\Fungsional\DataTable::class, [
             "createLink" => route('fungsionals.create'),
-            "perPage" => 5
+            "perPage" => 25
         ])
     @else
         @livewire(App\Http\Livewire\Backend\Fungsional\DataTable::class, [
             "createLink" => "",
-            "perPage" => 5
+            "perPage" => 25
         ])
     @endcan
     @can('fungsionals_manage')

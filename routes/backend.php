@@ -95,7 +95,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
         Route::get('', PegawaiIndex::class)->middleware('can:pegawai_access')->name('pegawai.index');
         Route::get('/create', PegawaiCreate::class)->middleware('can:pegawai_manage')->name('pegawai.create');
-        Route::get('/cetak', [PrintController::class, 'print'])->name('pegawai.print');
+        Route::get('/cetak/{user?}', [PrintController::class, 'print'])->name('pegawai.print');
         Route::get('/{user}', PegawaiShow::class)->middleware('can:pegawai_access')->name('pegawai.show');
         Route::get('/{user}/edit', PegawaiEdit::class)->middleware('can:pegawai_manage')->name('pegawai.edit');
 

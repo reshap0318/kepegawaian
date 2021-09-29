@@ -24,7 +24,7 @@
             </div>
             <div>
                 <h1 class="text-center justify-between text-2xl font-bold text-gray-900">{{ Auth()->user()->pegawai->nama }}</h1>
-                <p class="text-center justify-between text-sm font-medium text-gray-500">Sebagai {{ Auth()->user()->roles()->first()->name }} di {{ Auth()->user()->pegawai->unit->nama }}</p>
+                <p class="text-center justify-between text-sm font-medium text-gray-500">Sebagai {{ optional(Auth()->user()->roles()->first())->name ?? "Not Define" }} di {{ Auth()->user()->pegawai->unit->nama }}</p>
             <br>
             </div>
         </div>

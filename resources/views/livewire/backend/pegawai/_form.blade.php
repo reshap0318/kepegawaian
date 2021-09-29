@@ -48,7 +48,7 @@
                         <div class="mt-1 lg:hidden">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 inline-block rounded-full overflow-hidden h-10 w-10" aria-hidden="true">
-                                    <img class="rounded-full h-full w-full" src="{{ $avatar ?? "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixqx=s7VhhWJvnN&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80" }}" alt="">
+                                    <img class="rounded-full h-full w-full" src="{{ $avatar ?? asset('image/avatar-default.png') }}" alt="">
                                 </div>
                                 <div class="ml-5 rounded-md shadow-sm">
                                     <div class="group relative border border-gray-300 rounded-md py-2 px-3 flex items-center justify-center hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-light-blue-500">
@@ -63,7 +63,7 @@
                         </div>
         
                         <div class="hidden relative rounded-full overflow-hidden lg:block">
-                            <img class="relative rounded-full w-32 h-32" src="{{ $avatar ?? "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixqx=s7VhhWJvnN&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80" }}" alt="">
+                            <img class="relative rounded-full w-32 h-32" src="{{ $avatar ?? asset('image/avatar-default.png') }}" alt="">
                             <label for="user-photo" class="absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100">
                                 <span>Change</span>
                                 <span class="sr-only"> user photo</span>

@@ -9,12 +9,12 @@
     @can('units_manage')    
         @livewire(App\Http\Livewire\Backend\Unit\DataTable::class, [
             "createLink" => route('units.create'),
-            "perPage" => 5
+            "perPage" => 25
         ])
     @else
         @livewire(App\Http\Livewire\Backend\Unit\DataTable::class, [
             "createLink" => "",
-            "perPage" => 5
+            "perPage" => 25
         ])
     @endcan
     @can('units_manage')

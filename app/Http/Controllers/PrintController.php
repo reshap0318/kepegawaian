@@ -8,12 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class PrintController extends Controller
 {
-    public function print($id=null)
+    public function print(User $user)
     {
         $myunit = Auth::user()->pegawai->myUnits();
-        $users = User::select('users.*')->join('pegawai','pegawai.id','=','users.id')->whereIn("unit_id", $myunit);
+        $users = User::select('users.*')->join('pegawai','pegawai.id','=','users.id')->whereIn("unit_id", $myunit)->get();
         if(Auth::user()->can('pegawai_list')){
             $users = User::all();
+        }
+        if($user->id){
+            $users = [$user];
         }
         // $users = User::where('id',4)->get();
         $pdf = PDF::loadView('livewire.backend.pegawai.print',['users'=> $users]);

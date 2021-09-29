@@ -9,13 +9,13 @@
     @can('apiAksess_manage')
         @livewire(App\Http\Livewire\Backend\ApiAkses\DataTable::class, [
             "createLink" => route('apiAksess.create'),
-            "perPage" => 5
+            "perPage" => 25
         ])
      <x-crud-simbol/> 
     @else
         @livewire(App\Http\Livewire\Backend\ApiAkses\DataTable::class, [
             "createLink" => "",
-            "perPage" => 5
+            "perPage" => 25
         ])
     @endcan
 </div>

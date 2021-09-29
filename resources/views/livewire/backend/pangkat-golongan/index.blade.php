@@ -9,12 +9,12 @@
     @can('jabatan-units_manage')    
         @livewire(App\Http\Livewire\Backend\PangkatGolongan\DataTable::class, [
             "createLink" => route('pangkatGolongans.create'),
-            "perPage" => 5
+            "perPage" => 25
         ])
     @else
         @livewire(App\Http\Livewire\Backend\PangkatGolongan\DataTable::class, [
             "createLink" => "",
-            "perPage" => 5
+            "perPage" => 25
         ])
     @endcan
     @can('pangkat-golongans_manage') 

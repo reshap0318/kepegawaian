@@ -29,7 +29,7 @@ class Index extends Component
             'pegawais' => $pegawais->where(function($query)
             {
                 $query->where('nip','like','%'.$this->search.'%')->orWhere('nama','like','%'.$this->search.'%');
-            })->orderby('unit_id','asc')->paginate(5)
+            })->orderby('unit_id','asc')->paginate(25)
         ]);
     }
 

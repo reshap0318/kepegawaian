@@ -17,7 +17,7 @@
     @foreach ($users as $user)
         <div style="width: 1vh; padding:0px; margin:0px;page-break-after: always;">
             <div>
-                <img src="{{ $user->pegawai->avatar ? public_path('storage/'.$user->pegawai->avatar) : "https://uxwing.com/wp-content/themes/uxwing/download/12-people-gesture/avatar.png" }}" alt="avatar" height="70" style="float:left;margin:0 8px 4px 0;" >
+                <img src="{{ $user->pegawai->avatar ? public_path('storage/'.$user->pegawai->avatar) : public_path('image/avatar-default.png') }}" alt="avatar" height="70" style="float:left;margin:0 8px 4px 0;" >
                 <p style="font-size: 17px;margin-bottom:0px;font-weight:bold;">{{ $user->pegawai->nama_lengkap }}</p>
                 <small>Sebagai {{ $user->roles()->first() ? $user->roles()->first()->name : "" }} di {{ $user->pegawai->unit->nama }}</small>
             </div>
